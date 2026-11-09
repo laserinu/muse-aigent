@@ -1,0 +1,66 @@
+{
+  "helper": "0x3ecc88cbad515d4f34dd365a109cb7bb71a2ffcf",
+  "pool": "0xD64FbdA67E1015dF43Fa5e49F02cA844729E5F94",
+  "legs": {
+    "buy": {
+      "tick": 129293,
+      "spotOut": "4119527123495749972",
+      "minOut": "3707574411146174974",
+      "fundTx": "0xa0c97e33ccdd2a7bca3d168b95dd96840bbc30ef450443c8a83d19e72ee03c7f",
+      "fundGas": "53887",
+      "fundStatus": "success",
+      "swapTx": "0x4945b4914d32d64eae1c9e7d5ac146a7d33281451cc6fc420a5f8607041d98ca",
+      "swapGas": "142703",
+      "swapStatus": "success"
+    },
+    "sell": {
+      "tick": 129293,
+      "spotOut": "9900001050813",
+      "minOut": "8910000945731",
+      "amountIn": "4078331419375399506",
+      "fundTx": "0x610a32f280f145b324a202c0159bacd23b16cb7a0c70d965ff942ed255683e1c",
+      "fundGas": "47049",
+      "fundStatus": "success",
+      "swapTx": "0x81ee8c9e9ef63f11ec452adcb29ddd7cdc884f3195442b7d51280b5cfc4f8e3e",
+      "swapGas": "141044",
+      "swapStatus": "success"
+    }
+  },
+  "before": {
+    "agent": {
+      "eth": "371659661931821",
+      "weth": "10000000000000",
+      "delta": "0"
+    },
+    "helper": {
+      "eth": "0",
+      "weth": "0",
+      "delta": "0"
+    }
+  },
+  "afterBuy": {
+    "agent": {
+      "eth": "367723219603821",
+      "weth": "0",
+      "delta": "4078331419375399506"
+    },
+    "helper": {
+      "eth": "0",
+      "weth": "0",
+      "delta": "0"
+    }
+  },
+  "afterSell": {
+    "agent": {
+      "eth": "363956280165821",
+      "weth": "9801000010403",
+      "delta": "0"
+    },
+    "helper": {
+      "eth": "0",
+      "weth": "0",
+      "delta": "0"
+    }
+  },
+  "verdict": "PROVEN — helper buys AND sells a V3 pool on Robinhood"
+}

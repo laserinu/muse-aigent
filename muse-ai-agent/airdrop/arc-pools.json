@@ -1,0 +1,282 @@
+[
+ {
+  "address": "0x82916bee18fcef517b26c72d7cb5f13694e1db41",
+  "name": "cirbtc / USDC 0.01%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 4615961.41576399,
+  "tx24": 13097
+ },
+ {
+  "address": "0x86a68d86465bcf19779454e1b4d31368740503c7",
+  "name": "cirbtc / USDC 0.038%",
+  "dex": "aero-slipstream-arc",
+  "vol24": 1765763.93200102,
+  "tx24": 5542
+ },
+ {
+  "address": "0xad5eea00214715cce97cdc4d0d13e9ee2b57eace",
+  "name": "WETH / USDC 0.032%",
+  "dex": "aero-slipstream-arc",
+  "vol24": 1377949.02047052,
+  "tx24": 5024
+ },
+ {
+  "address": "0x6f57b4c22155cef09f17184c954f227ff0493742",
+  "name": "EURC / USDC 0.071%",
+  "dex": "aero-slipstream-arc",
+  "vol24": 640663.086665887,
+  "tx24": 502
+ },
+ {
+  "address": "0x5e4d45a31beab080b73123b07f4757573e69f922",
+  "name": "WETH / cirbtc 0.063%",
+  "dex": "aero-slipstream-arc",
+  "vol24": 490023.733300182,
+  "tx24": 1108
+ },
+ {
+  "address": "0xb88c08e31c1bc7d41f2cfc4fbafad5b3b0a5eae9",
+  "name": "EURC / USDC 0.064%",
+  "dex": "archery-v3",
+  "vol24": 228110.774098138,
+  "tx24": 339
+ },
+ {
+  "address": "0x948523143f6610a64ee8f17667818fe1d8c9f562",
+  "name": "cirbtc / USDC 0.025%",
+  "dex": "archery-v3",
+  "vol24": 137320.379745113,
+  "tx24": 1494
+ },
+ {
+  "address": "0x072ca55acb3cc90f96b7f7807cf8de2250af4dc7",
+  "name": "WETH / USDC 0.047%",
+  "dex": "archery-v3",
+  "vol24": 135303.55213296,
+  "tx24": 2277
+ },
+ {
+  "address": "0xd945caee4635bcd7fb8a9fa74dc1d0c4c1472782",
+  "name": "cirbtc / USDC 0.055%",
+  "dex": "aero-arc",
+  "vol24": 122505.482273406,
+  "tx24": 1032
+ },
+ {
+  "address": "0x6f302decb49fb30b2d2c609bdd16e04e7dd096fc",
+  "name": "WETH / USDC 0.05%",
+  "dex": "aero-arc",
+  "vol24": 102127.601071858,
+  "tx24": 1337
+ },
+ {
+  "address": "0x1bb5c22ae4560dc887164d96ebeaa756130948314ce132fee3c8d14e5b95758b",
+  "name": "ASTOCK / USDC 1%",
+  "dex": "argus",
+  "vol24": 79300.9029047462,
+  "tx24": 383
+ },
+ {
+  "address": "0xa2ed014384e061ec2aaccea186d41798dcf4da29264c44a676d3006fdc252ae0",
+  "name": "ARCOON / USDC",
+  "dex": "peach",
+  "vol24": 66239.6454010092,
+  "tx24": 3420
+ },
+ {
+  "address": "0x6a3bacaa6493734c1ac221ebf42cf530a96c1e02",
+  "name": "ARGUS / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 65572.9941356002,
+  "tx24": 677
+ },
+ {
+  "address": "0xf445c84465ac57ad417ea4bf5fe0b488302d277dffc01b64bdc136058c236bbf",
+  "name": "ASTOCK / USDC 1.8%",
+  "dex": "uniswap-v4-arc",
+  "vol24": 55411.2713468491,
+  "tx24": 564
+ },
+ {
+  "address": "0x162df51c504e7b8321e07387932f333d9be16a72",
+  "name": "TOLLY / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 54426.9924636367,
+  "tx24": 758
+ },
+ {
+  "address": "0xd9133187331e20885fd1b4ff2f18b892f94793ddaf808b1db6d4ef29ca58b943",
+  "name": "FAZE / USDC",
+  "dex": "faze",
+  "vol24": 51409.8961646471,
+  "tx24": 889
+ },
+ {
+  "address": "0x1c0523377296238f6a2fd25cb3b15f75e280eb330ad29f843b974eec264dfe31",
+  "name": "AF / USDC",
+  "dex": "faze",
+  "vol24": 41038.026666543,
+  "tx24": 1225
+ },
+ {
+  "address": "0xbb4833049071d4a8aceb11fe2e9c67bb9a35e85fdc2108c9b9091c2ccb2311cc",
+  "name": "coin / USDC 0.25%",
+  "dex": "uniswap-v4-arc",
+  "vol24": 33939.3595351154,
+  "tx24": 232
+ },
+ {
+  "address": "0x6b1d3440438e716ef3932c7ce9c42e6cdfa561488db17e6da68fd1e8489522ea",
+  "name": "MIM / USDC 0.25%",
+  "dex": "uniswap-v4-arc",
+  "vol24": 33261.8813897777,
+  "tx24": 233
+ },
+ {
+  "address": "0x3bd11f1a8cfd8f27d8cc46e6a1c896dbcc993135e191b9483d745906b85fc63a",
+  "name": "ASTOCK / USDC 1.9%",
+  "dex": "uniswap-v4-arc",
+  "vol24": 32842.7773309367,
+  "tx24": 386
+ },
+ {
+  "address": "0xdde44b4067d54958f756836432f2a397b9b958f76531fa9fade1ae36a6b27537",
+  "name": "HALO / USDC 0.25%",
+  "dex": "uniswap-v4-arc",
+  "vol24": 32767.0645554842,
+  "tx24": 230
+ },
+ {
+  "address": "0x6b39763bf7ef809e10aff4455fc667e06bae42f46227678bfb267787860454d9",
+  "name": "JOB / USDC 0.25%",
+  "dex": "uniswap-v4-arc",
+  "vol24": 32414.5784244733,
+  "tx24": 235
+ },
+ {
+  "address": "0x47ee4bc1bb073e134f46a3080ddf4f78049beb05f98a4aa42e6a0c852352636b",
+  "name": "RM / USDC 0.25%",
+  "dex": "uniswap-v4-arc",
+  "vol24": 32284.5008401104,
+  "tx24": 237
+ },
+ {
+  "address": "0x6fd5f2fb831940dcd61a98c5b3acb7d8c6f3bfc1",
+  "name": "EURC / USDC 0.05%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 26388.938813504,
+  "tx24": 2323
+ },
+ {
+  "address": "0xcb39398862db54384d5bc8c98077e012a5ae7cb1dbc3c6fcaf256c5e10568ab8",
+  "name": "UBI / USDC",
+  "dex": "uniswap-v4-arc",
+  "vol24": 20715.5157772186,
+  "tx24": 233
+ },
+ {
+  "address": "0x40732e01ba7a829dea44f51a10e7c58cd9f37765",
+  "name": "COOL / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 15959.9523387443,
+  "tx24": 533
+ },
+ {
+  "address": "0xbe080ac37ad1305dfcc9521f5e6f68cfdc41b7fa",
+  "name": "EURC / USDC 0.026%",
+  "dex": "aero-arc",
+  "vol24": 12106.8025146915,
+  "tx24": 246
+ },
+ {
+  "address": "0xa3abdb2721cd343da530ff6fd0ad73f3caa77163ea2fb8206847249f9bba57d5",
+  "name": "ARCMAN / USDC",
+  "dex": "peach",
+  "vol24": 7562.9103710006,
+  "tx24": 568
+ },
+ {
+  "address": "0x64d77c65a5cbd728d891140fd5c30e07d21ee65b",
+  "name": "CRCL / USDC 0.3%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 3036.5800505983,
+  "tx24": 518
+ },
+ {
+  "address": "0x482a249eb473b7de0ca8357b5496ccb7c55dfb72",
+  "name": "ARCBAT / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 2157.7455426847,
+  "tx24": 525
+ },
+ {
+  "address": "0xf89005ccf237a59eeee1521e74b15c7d8d022ab7",
+  "name": "ARCT / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 1545.4040277621,
+  "tx24": 516
+ },
+ {
+  "address": "0xda9f3d166497ddfddf37c93cacfd8aa39b71e493",
+  "name": "LONG / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 654.8695193963,
+  "tx24": 1070
+ },
+ {
+  "address": "0x9673b01178e483c9ea427a76567ed6383e6ca72f",
+  "name": "DUKE / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 566.5125074655,
+  "tx24": 489
+ },
+ {
+  "address": "0x085c2b626c6440e84e000267af157537be469b11",
+  "name": "MALA / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 474.0807967246,
+  "tx24": 526
+ },
+ {
+  "address": "0x0069cb6f70e2f848405f4483f232274c720ce6f9",
+  "name": "Architects / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 251.1157669319,
+  "tx24": 500
+ },
+ {
+  "address": "0x99a0505d58cc5d7bf3513cc75f2a605a23f0f79f",
+  "name": "EURC / USDC 0.01%",
+  "dex": "unitflow-finance",
+  "vol24": 218.2531552874,
+  "tx24": 359
+ },
+ {
+  "address": "0x55935d324edf000aafe5d0b84771116dac702f21",
+  "name": "ARCAT / USDC",
+  "dex": "uniswap-v2-arc",
+  "vol24": 165.3832432511,
+  "tx24": 658
+ },
+ {
+  "address": "0xfd0dc7b3591cb578fd1affcd652ca6e2907c63e9",
+  "name": "Minara / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 111.4455507217,
+  "tx24": 507
+ },
+ {
+  "address": "0xe51be59e0c1fed915888a345877b77713f13d32c",
+  "name": "CHEESE / USDC 1%",
+  "dex": "uniswap-v3-arc",
+  "vol24": 107.5647785614,
+  "tx24": 522
+ },
+ {
+  "address": "0x4a2fc1fbe246f797894ba3d993a39c1e4879a101",
+  "name": "DT / USDC",
+  "dex": "uniswap-v2-arc",
+  "vol24": 106.7331235115,
+  "tx24": 520
+ }
+]

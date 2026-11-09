@@ -1,0 +1,14 @@
+{
+  "contract": "V3SwapHelper",
+  "chainId": 4663,
+  "deployTx": "0xc0744ab42c816bc08ee17904c9ed66ecc54e6acc514eccdac6938bba134f7bfa",
+  "block": "108683416",
+  "gasUsed": "700024",
+  "status": "success",
+  "address": "0x3ecc88cbad515d4f34dd365a109cb7bb71a2ffcf",
+  "predicted": "0x3ecc88CBaD515D4F34dD365A109Cb7bB71a2FfcF",
+  "nonce": 75,
+  "owner": "0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4",
+  "creationBytes": 3074,
+  "deployedBytes": 3000
+}

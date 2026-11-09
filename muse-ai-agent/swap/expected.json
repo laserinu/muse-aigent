@@ -1,0 +1,9 @@
+{
+  "amountIn": "50000",
+  "grossExpected": "986590472305758645",
+  "feeExpected": "29597714169172759",
+  "netExpected": "956992758136585886",
+  "amountOutMinimum": "937852902973854168",
+  "deadline": 1794008169,
+  "expiration": 1825542369
+}

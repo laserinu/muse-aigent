@@ -1,0 +1,7 @@
+{
+  "name": "MuseLinuFeeCollector",
+  "address": "0x0000000f64352eb1bacef4d9d5cae00f505a149e",
+  "salt": "0x00000000000000000000000000000000000000000000000000000001e52c2dc6",
+  "factory": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+  "target": "0x0000000f"
+}

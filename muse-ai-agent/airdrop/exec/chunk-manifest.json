@@ -1,0 +1,82 @@
+[
+  {
+    "chunk": 1,
+    "recipients": 200,
+    "first": "0xe5e0e8d89c3c6baa677dda470c6f14dc159349ef",
+    "last": "0x96949fd549d0da5ca279662264085a93138bdb17",
+    "totalBaseUnits": "2000000000000000000000",
+    "dataBytes": 12964
+  },
+  {
+    "chunk": 2,
+    "recipients": 200,
+    "first": "0x6a018906257c3b561fbc7e520bab98782e0d9b0b",
+    "last": "0x15c88d2fe91e681d670c6b1709d1f77ad693aabc",
+    "totalBaseUnits": "1000000000000000000000",
+    "dataBytes": 12964
+  },
+  {
+    "chunk": 3,
+    "recipients": 200,
+    "first": "0x8e4e13ac78b00802ea1c0be68484a8d7f68f4be2",
+    "last": "0xee49c348a94f6448d3eb9413c586ba209d74b2d5",
+    "totalBaseUnits": "742000000000000000000",
+    "dataBytes": 12964
+  },
+  {
+    "chunk": 4,
+    "recipients": 200,
+    "first": "0xd10d38534515b45359dd6fbbb4dd092c89eaa910",
+    "last": "0xe44d83e3d901d4413c6b6da7c302b90bd1b7f4c7",
+    "totalBaseUnits": "346000000000000000000",
+    "dataBytes": 12964
+  },
+  {
+    "chunk": 5,
+    "recipients": 200,
+    "first": "0xb7fd4419f4bc7213bbda5111ea64b82fcc47f5f0",
+    "last": "0xa5efdac2165109abb6c438e582b27016916ede3a",
+    "totalBaseUnits": "200000000000000000000",
+    "dataBytes": 12964
+  },
+  {
+    "chunk": 6,
+    "recipients": 200,
+    "first": "0xac1565f8baefbe165bb3670d712df1aecba2dc61",
+    "last": "0xed9dcd228fa818c80244e8bf8c9b45342831d3c7",
+    "totalBaseUnits": "200000000000000000000",
+    "dataBytes": 12964
+  },
+  {
+    "chunk": 7,
+    "recipients": 200,
+    "first": "0x04b53d38a07884b6f59df94819696dad0c3da12c",
+    "last": "0x3f31a34f30cee972b6a76da68bec7373482388ef",
+    "totalBaseUnits": "125000000000000000000",
+    "dataBytes": 12964
+  },
+  {
+    "chunk": 8,
+    "recipients": 200,
+    "first": "0x5915a71e4722e604033d438aedd8ea718e8a5f64",
+    "last": "0x80fd6e4464881c7c7386949590b04220bb001558",
+    "totalBaseUnits": "100000000000000000000",
+    "dataBytes": 12964
+  },
+  {
+    "chunk": 9,
+    "recipients": 200,
+    "first": "0x9c3124c5dd2e7b267cbaf196dc9c2f63fb9ff417",
+    "last": "0x6a9fc33426a7bf7acc1fc39827be75359ce80293",
+    "totalBaseUnits": "100000000000000000000",
+    "dataBytes": 12964
+  },
+  {
+    "chunk": 10,
+    "recipients": 50,
+    "first": "0x9d67830773a0b42fb36ca4bb980b7a8517bb35b0",
+    "last": "0xd08c46de31e9dfe1cac26033a77962daa07cd4ff",
+    "totalBaseUnits": "25000000000000000000",
+    "dataBytes": 3364
+  }
+]
