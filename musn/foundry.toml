@@ -6,6 +6,8 @@ solc = "0.8.26"
 evm_version = "paris"
 optimizer = true
 optimizer_runs = 200
+# BuildDeployCalldata writes tools/deploy-<chain>.json via vm.writeJson.
+fs_permissions = [{ access = "read-write", path = "./tools" }]
 # Skip test files here: the v4-core test utils pull in PoolManager, which
 # uses transient storage (Cancun-only). Tests run under profile.test.
 skip = ["test/**"]

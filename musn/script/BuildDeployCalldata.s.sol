@@ -56,7 +56,7 @@ contract BuildDeployCalldata is Script {
             return ChainCfg({
                 poolManager: 0x67366782805870060151383F4BbFF9daB53e5cD6,
                 positionManager: 0x1Ec2eBf4F37E7363FDfe3551602425af0B3ceef9,
-                quote: address(0),
+                quote: 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270, // WPOL (was native POL; Polygon pools standardly use WPOL — report §13)
                 seedQuote: 1_980_000_000_000_000_000,
                 fullRange: false
             });

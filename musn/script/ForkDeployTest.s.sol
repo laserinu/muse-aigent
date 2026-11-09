@@ -52,6 +52,7 @@ contract ForkDeployTest is Script {
     address constant ARACHNID = 0x4e59b44847b379578588920cA78FbF26c0B4956C;
     address constant PERMIT2 = 0x000000000022D473030F116dDEE9F6B43aC78BA3;
     address constant DEAD = 0x000000000000000000000000000000000000dEaD;
+    address constant WPOL = 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270; // Polygon WPOL (verified onchain: "Wrapped Polygon Ecosystem Token" / WPOL)
 
     uint256 constant MUSN_AMOUNT = 25_000_000_000_000 * 1e9; // 25T, 9 dec
     uint24 constant POOL_FEE = 3000;
@@ -91,8 +92,8 @@ contract ForkDeployTest is Script {
             return ChainCfg({
                 poolManager: 0x67366782805870060151383F4BbFF9daB53e5cD6,
                 positionManager: 0x1Ec2eBf4F37E7363FDfe3551602425af0B3ceef9,
-                quote: address(0), // native POL
-                seedQuote: 1_980_000_000_000_000_000, // 1.98 POL
+                quote: 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270, // WPOL (was native POL; Polygon pools standardly use WPOL — report §13)
+                seedQuote: 1_980_000_000_000_000_000, // 1.98 WPOL
                 fullRange: false,
                 useMockUSDC: false
             });
@@ -372,8 +373,9 @@ contract ForkDeployTest is Script {
 
     /// @notice $0.05 of fees in the quote's base units (see _automationDryRun).
     function _automationThreshold(ChainCfg memory cfg, Deploy memory d) internal pure returns (uint256) {
-        if (d.isNative) {
-            // $0.05 / $0.126156 per POL, 18 dec.
+        if (d.isNative || d.quote == WPOL) {
+            // $0.05 / $0.126156 per POL, 18 dec. (WPOL is priced 1:1 with POL;
+            // the threshold is a POL-denominated amount either way.)
             return 396_300_000_000_000_000; // ~0.3963 POL
         }
         if (cfg.useMockUSDC) {

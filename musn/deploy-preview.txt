@@ -7,14 +7,14 @@ Owner:    0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4
 --- BASE (chain 8453) ---
   token:     0x0000000fc9a3c921ca909d84ae404a9ccaef4479
   collector: 0x0000000f64352eb1bacef4d9d5cae00f505a149e
-  hook:      0xbef3651efb37dffc730c9715424be55dfba100cc  salt 0x0000000000000000000000000000000000000000000000000000000000000515 (flags 0xCC)
-  hook initCodeHash: 0xa05402e12261e4c1268ddda77bea0c8d30b6e1decff6d86ec1b606d048299cb4
-  pool: MUSN/WETH fee 3000, hook 0xCC, ticks [189420, 193920]
+  hook:      0x833b94cf03bd02c25bad3ce19e906622b37f00cc  salt 0x000000000000000000000000000000000000000000000000000000000001b3e2 (flags 0xCC)
+  hook initCodeHash: 0xb0a2304ac5f6c7f591508ba95e243d5b1aff624bfd085612d5b571c4f07fe925
+  pool: MUSN/WETH fee 3000, hook 0xCC, ticks [-193920, -189420]
   seed: 25T MUSN + 118700000000000 WETH base units (~$0.25)
   deploy tx order:
     1. CREATE2 token (salt 0x00000000000000000000000000000000000000000000000000000000ff37a90a)
     2. CREATE2 collector (salt 0x00000000000000000000000000000000000000000000000000000001e52c2dc6)
-    3. CREATE2 hook (salt 0x0000000000000000000000000000000000000000000000000000000000000515)
+    3. CREATE2 hook (salt 0x000000000000000000000000000000000000000000000000000000000001b3e2)
     4. initialize pool (MUSN/WETH, fee 3000, hook)
     5. approve MUSN + quote to Permit2, mint seed position (25T + quote)
     6. (recommended) burn leftover seed MUSN dust to dead address
@@ -24,31 +24,31 @@ Owner:    0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4
 --- POLYGON (chain 137) ---
   token:     0x0000000fc9a3c921ca909d84ae404a9ccaef4479
   collector: 0x0000000f64352eb1bacef4d9d5cae00f505a149e
-  hook:      0x725a6e8cd8d9f628c9c5c802aa4b06d84ea600cc  salt 0x0000000000000000000000000000000000000000000000000000000000006201 (flags 0xCC)
-  hook initCodeHash: 0xdc08675a5e490127ea31baf580a6718c8e5b7dd889c72509d1654a5fc4cc4572
-  pool: MUSN/WPOL (native POL) fee 3000, hook 0xCC, ticks [92220, 96660]
-  seed: 25T MUSN + 1980000000000000000 WPOL (native POL) base units (~$0.25)
+  hook:      0xe77331388cd74fc9b5d453925b5f6f834e6000cc  salt 0x0000000000000000000000000000000000000000000000000000000000003e4b (flags 0xCC)
+  hook initCodeHash: 0xa9eff09e585ef683eea006386c83d3aa12bae48544d0815305fc221411bf64d6
+  pool: MUSN/WPOL fee 3000, hook 0xCC, ticks [-96720, -92220]
+  seed: 25T MUSN + 1980000000000000000 WPOL base units (~$0.25)
   deploy tx order:
     1. CREATE2 token (salt 0x00000000000000000000000000000000000000000000000000000000ff37a90a)
     2. CREATE2 collector (salt 0x00000000000000000000000000000000000000000000000000000001e52c2dc6)
-    3. CREATE2 hook (salt 0x0000000000000000000000000000000000000000000000000000000000006201)
-    4. initialize pool (MUSN/WPOL (native POL), fee 3000, hook)
+    3. CREATE2 hook (salt 0x0000000000000000000000000000000000000000000000000000000000003e4b)
+    4. initialize pool (MUSN/WPOL, fee 3000, hook)
     5. approve MUSN + quote to Permit2, mint seed position (25T + quote)
     6. (recommended) burn leftover seed MUSN dust to dead address
-  gas estimate: ~7,853,827 gas (fork, with-automation upper bound) = 0.060762 POL (~$0.0077)
+  gas estimate: ~8,814,289 gas (fork, with-automation upper bound) = 0.068193 POL (~$0.0086)
   sniper reserve left: 3.37 POL (~$0.43) after the 0.16 POL setAgentURI reserve — ~21 buys
 
 --- ARC (chain 5042) ---
   token:     0x0000000fc9a3c921ca909d84ae404a9ccaef4479
   collector: 0x0000000f64352eb1bacef4d9d5cae00f505a149e
-  hook:      0x223500a0ace445df744c790cd8dbdc00cd1f00cc  salt 0x00000000000000000000000000000000000000000000000000000000000299d2 (flags 0xCC)
-  hook initCodeHash: 0x280bcf074b87d1e2caa43e90d6eec30c75be374b6e6fc78535385382dd7e3cdb
-  pool: MUSN/USDC fee 3000, hook 0xCC, ticks [389220, 393720]
+  hook:      0x88a5b0efe0985c3a9f18174ff2178c98d0c000cc  salt 0x000000000000000000000000000000000000000000000000000000000000267f (flags 0xCC)
+  hook initCodeHash: 0xa3171a35fb8773c1cc50b36eaa4f28b717676a527a11d43acd5e1899a7b5890b
+  pool: MUSN/USDC fee 3000, hook 0xCC, ticks [-393720, -389220]
   seed: 25T MUSN + 250000 USDC base units (~$0.25)
   deploy tx order:
     1. CREATE2 token (salt 0x00000000000000000000000000000000000000000000000000000000ff37a90a)
     2. CREATE2 collector (salt 0x00000000000000000000000000000000000000000000000000000001e52c2dc6)
-    3. CREATE2 hook (salt 0x00000000000000000000000000000000000000000000000000000000000299d2)
+    3. CREATE2 hook (salt 0x000000000000000000000000000000000000000000000000000000000000267f)
     4. initialize pool (MUSN/USDC, fee 3000, hook)
     5. approve MUSN + quote to Permit2, mint seed position (25T + quote)
     6. (recommended) burn leftover seed MUSN dust to dead address
@@ -58,14 +58,14 @@ Owner:    0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4
 --- ROBINHOOD (chain 4663) ---
   token:     0x0000000fc9a3c921ca909d84ae404a9ccaef4479
   collector: 0x0000000f64352eb1bacef4d9d5cae00f505a149e
-  hook:      0xe158bbbcca278ff57369af37d4f9b25431da00cc  salt 0x0000000000000000000000000000000000000000000000000000000000008937 (flags 0xCC)
-  hook initCodeHash: 0x6f13e06acf86826be400b0c56df75c68b2419a4916b4ceef03cd84db492c7129
+  hook:      0x15a97f2b6be0b092ad77e77d0d89acda5c0900cc  salt 0x0000000000000000000000000000000000000000000000000000000000007983 (flags 0xCC)
+  hook initCodeHash: 0x37cdcf573a10450975c9633192ed79d89260570bef9254c7dd478a645d04ec28
   pool: MUSN/WETH fee 3000, hook 0xCC, ticks [-887220, 887220]
   seed: 25T MUSN + 118700000000000 WETH base units (~$0.25)
   deploy tx order:
     1. CREATE2 token (salt 0x00000000000000000000000000000000000000000000000000000000ff37a90a)
     2. CREATE2 collector (salt 0x00000000000000000000000000000000000000000000000000000001e52c2dc6)
-    3. CREATE2 hook (salt 0x0000000000000000000000000000000000000000000000000000000000008937)
+    3. CREATE2 hook (salt 0x0000000000000000000000000000000000000000000000000000000000007983)
     4. initialize pool (MUSN/WETH, fee 3000, hook)
     5. approve MUSN + quote to Permit2, mint seed position (25T + quote)
     6. (recommended) burn leftover seed MUSN dust to dead address
@@ -78,5 +78,5 @@ Owner:    0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4
 - Bridge choice (Relay vs lock/release): open.
 - MAINNET GO: NOT authorized — this preview is for the user's final go.
 - Dust: the concentrated seed leaves MUSN dust with the deployer
-  (Polygon 5 base units, Base ~104.6B, Arc ~229B). Recommend burning
+  (Polygon ~620.7B, Base ~104.6B, Arc ~229B). Recommend burning
   the dust to the dead address after seeding so deployer holds 0.

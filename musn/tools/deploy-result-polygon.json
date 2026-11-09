@@ -1,0 +1,125 @@
+{
+  "chain": "polygon",
+  "chainId": 137,
+  "status": "deployed",
+  "startedAt": "2026-11-09T14:26:57.177Z",
+  "txs": [
+    {
+      "step": "deploy-token",
+      "hash": "0x00362905a6c0c279a7a108abc9165f3ed8d13eda6190b09b6085f20388137d0d",
+      "block": 97019313,
+      "gasUsed": "645250",
+      "effectiveGasPriceWei": "260583802639",
+      "via": "polygon-sign-broadcast"
+    },
+    {
+      "step": "deploy-collector",
+      "hash": "0x9c6d1a085ccd391f2dbc4908b4184c074ac9c6028a4a039473526e258ac36624",
+      "block": 97019316,
+      "gasUsed": "265629",
+      "effectiveGasPriceWei": "259401704868",
+      "via": "polygon-sign-broadcast"
+    },
+    {
+      "step": "deploy-hook",
+      "hash": "0x8cc1faef2ca754f7235c989c4a1c1b89a0b6cf0524ee5a723ed4d4b5d2ecddc8",
+      "block": 97019319,
+      "gasUsed": "1157041",
+      "effectiveGasPriceWei": "261452374288",
+      "via": "polygon-sign-broadcast",
+      "note": "sent in run 1; receipt fetch 403d transiently, confirmed status 1 via retry + hook code check"
+    },
+    {
+      "step": "deploy-token",
+      "skipped": true,
+      "reason": "already done: token code already at preview address"
+    },
+    {
+      "step": "deploy-collector",
+      "skipped": true,
+      "reason": "already done: collector code already at preview address"
+    },
+    {
+      "step": "deploy-hook",
+      "skipped": true,
+      "reason": "already done: hook code already at preview address"
+    },
+    {
+      "step": "wrap-weth",
+      "skipped": true,
+      "reason": "wrap skipped \u2014 held WPOL covers seed"
+    },
+    {
+      "step": "approve-musn-permit2",
+      "hash": "0xf934e49f0168331499eb947a46b16fbadb687c36f5782123c58d2acbe484886b",
+      "block": 97019400,
+      "gasUsed": "47175",
+      "effectiveGasPriceWei": "246915715247",
+      "via": "polygon-sign-broadcast"
+    },
+    {
+      "step": "approve-quote-permit2",
+      "hash": "0x749db2f76866d2d06532f6d98b50658d290d7b27904d5a2696e50e3f747c28b7",
+      "block": 97019402,
+      "gasUsed": "46865",
+      "effectiveGasPriceWei": "246047943709",
+      "via": "polygon-sign-broadcast"
+    },
+    {
+      "step": "permit2-approve-musn",
+      "hash": "0x542f70907011f7a8118b1559c410a3b3cd6bf55abaf4f35aa13c84e4cb93b722",
+      "block": 97019405,
+      "gasUsed": "50998",
+      "effectiveGasPriceWei": "244490754170",
+      "via": "polygon-sign-broadcast"
+    },
+    {
+      "step": "permit2-approve-quote",
+      "hash": "0xab3d2b542c5bfc9e60e64206e26020efda3572dac26d585036bfd82c5dffd8e3",
+      "block": 97019407,
+      "gasUsed": "51010",
+      "effectiveGasPriceWei": "243127933233",
+      "via": "polygon-sign-broadcast"
+    },
+    {
+      "step": "seed-multicall",
+      "hash": "0x532ab8052e0f3869455de1b3656a5a72c83cb7b59be13547d81135d62a264257",
+      "block": 97019410,
+      "gasUsed": "530153",
+      "effectiveGasPriceWei": "241507725064",
+      "via": "polygon-sign-broadcast"
+    },
+    {
+      "step": "burn-dust",
+      "hash": "0xb0f2671ee2bb0e52677702836c57a745ace00d3348c6d78c5cf8ae1cf97d0425",
+      "block": 97019413,
+      "gasUsed": "53360",
+      "effectiveGasPriceWei": "240320059845",
+      "via": "polygon-sign-broadcast"
+    }
+  ],
+  "verifications": {
+    "tokenCode": true,
+    "collectorCode": true,
+    "hookCode": true,
+    "poolId": "0x6f8feb328e09c9ec76975d358d3d27432e83219a100de33a82887c090318ad3b",
+    "poolSlot0": "0x000000000bb8000000fe8f17000000000000000002473bcbf48c398bb99f9d8b",
+    "poolLiquidity": "0x00000000000000000000000000000000000000000000006ff3924498cb44d577",
+    "musnDustBeforeBurn": "620725130941351311174",
+    "musnBalanceAfterBurn": "0"
+  },
+  "skippedReason": null,
+  "error": null,
+  "preflight": {
+    "balanceWei": "4974601876886778921",
+    "gasPriceWei": "250344188505",
+    "gasPriceGwei": "250.344",
+    "wpolBalance": "2266700000000000000",
+    "estGasTotal": "3237118",
+    "estTotalCostWei": "810393678804928590"
+  },
+  "finishedAt": "2026-11-09T14:29:34.211Z",
+  "resumedAt": "2026-11-09T14:29:06.300Z",
+  "totalGasUsed": "2847481",
+  "totalGasPaidWei": "728466735177019022"
+}

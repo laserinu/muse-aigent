@@ -8,7 +8,7 @@ Live public site: https://laserinu.github.io/muse-website/
 
 - **$MUSE** (`muse-ai-agent/`) — live on Arc (chain 5042). Uniswap V4 hook token, 3% fee in the swap output token. Token `0xd1242aEcA57Cb80f9067800F2f43D78cc3F8D198`.
 - **$RMUSE** (`muse-ai-agent/` — see the Robinhood deploy docs) — live on Robinhood Chain (4663). Token `0x137aEA2D5fdb1e15711BbAfd31A038A933b5fd36`.
-- **MUSN / MuseLinu** (`musn/`) — build complete, **not deployed yet**. Same token + fee-collector addresses on Base, Polygon, Arc and Robinhood via CREATE2; V4 hook takes 2% to the collector + 1% burned per swap. Deployment was halted during pre-flight checks (hook addresses in the deploy preview need correcting) and will go live only after a corrected preview is approved.
+- **MUSN / MuseLinu** (`musn/`) — **LIVE on all four chains since 2026-11-09** (Base, Polygon, Arc, Robinhood). Token `0x0000000fc9a3c921ca909d84ae404a9ccaef4479`, collector `0x0000000f64352eb1bacef4d9d5cae00f505a149e` (same on all chains via CREATE2). One hooked V4 pool per chain (fee 3000 + 3% hook: 2% to the collector, 1% burned), seeded 25T MUSN + $0.25 quote. Deploy records in `musn/tools/deploy-result-*.json`.
 
 ## Token sniper (`sniper/`)
 

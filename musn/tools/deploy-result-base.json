@@ -1,0 +1,110 @@
+{
+  "chain": "base",
+  "chainId": 8453,
+  "status": "deployed",
+  "startedAt": "2026-11-09T14:25:05.619Z",
+  "txs": [
+    {
+      "step": "deploy-token",
+      "hash": "0xc5b9c6a5bbc5efcf1f794d0be44593cd53520550701ef274e001fe7b884bb8b0",
+      "block": 55219684,
+      "gasUsed": "631810",
+      "effectiveGasPriceWei": "6000000",
+      "via": "privy-send"
+    },
+    {
+      "step": "deploy-collector",
+      "hash": "0x031d30e7a9c7a475cbe3a7c7b2831eea15a3c3e2de55bba753f71948b9cc99df",
+      "block": 55219696,
+      "gasUsed": "265629",
+      "effectiveGasPriceWei": "6000000",
+      "via": "privy-send"
+    },
+    {
+      "step": "deploy-hook",
+      "hash": "0x8dc608f2f589ddbae46ea7aa523df1b4b502a1a1165ccd427bd0de7f3c62a556",
+      "block": 55219707,
+      "gasUsed": "1156837",
+      "effectiveGasPriceWei": "6000000",
+      "via": "privy-send"
+    },
+    {
+      "step": "wrap-weth",
+      "hash": "0x15b5e2536fed5d28c72fd3ab2902213544399419b406ebf020538a742451916e",
+      "block": 55219717,
+      "gasUsed": "44866",
+      "effectiveGasPriceWei": "6000000",
+      "via": "privy-send"
+    },
+    {
+      "step": "approve-musn-permit2",
+      "hash": "0x9cc9234cd9e8bf89aa69ef7c85d4a2b7d71d7145d5433d8ddb9d5c9acfd2f7b1",
+      "block": 55219728,
+      "gasUsed": "46335",
+      "effectiveGasPriceWei": "6000000",
+      "via": "privy-send"
+    },
+    {
+      "step": "approve-quote-permit2",
+      "hash": "0x59844a633220c86c7e07d34cc582d96a429df348f713a7ec736fbced0036e223",
+      "block": 55219738,
+      "gasUsed": "45959",
+      "effectiveGasPriceWei": "6000000",
+      "via": "privy-send"
+    },
+    {
+      "step": "permit2-approve-musn",
+      "hash": "0x91145fea93a9f348970e0d03b4649e20846e73346195fda68514949bdfa1506d",
+      "block": 55219747,
+      "gasUsed": "47638",
+      "effectiveGasPriceWei": "6007131",
+      "via": "privy-send"
+    },
+    {
+      "step": "permit2-approve-quote",
+      "hash": "0xc7d5ba0209b2526457dea4fd0834c836973d2bb79fc9adeb05ed045c150ec091",
+      "block": 55219760,
+      "gasUsed": "47422",
+      "effectiveGasPriceWei": "6000000",
+      "via": "privy-send"
+    },
+    {
+      "step": "seed-multicall",
+      "hash": "0xdf06c85db1337335cd231491df4cf85fbb0d85d97b73e0c160dd5a485a2cf6cc",
+      "block": 55219771,
+      "gasUsed": "440267",
+      "effectiveGasPriceWei": "6000000",
+      "via": "privy-send"
+    },
+    {
+      "step": "burn-dust",
+      "hash": "0x4dca965f70e2bc8d57c7bedc3468071bbbd08b67a62455fc9a86d4544aaa3dce",
+      "block": 55219786,
+      "gasUsed": "46640",
+      "effectiveGasPriceWei": "6007371",
+      "via": "privy-send"
+    }
+  ],
+  "verifications": {
+    "tokenCode": true,
+    "collectorCode": true,
+    "hookCode": true,
+    "poolId": "0x046b13c1f2ea8391995a5d902e1a3c96a752ea20d070b5defb70ae86452b4314",
+    "poolSlot0": "0x000000000bb8000000fd134e00000000000000000004840bde5529438a0845f8",
+    "poolLiquidity": "0x000000000000000000000000000000000000000000000000e0384746050d4124",
+    "musnDustBeforeBurn": "104628744460127650279",
+    "musnBalanceAfterBurn": "0"
+  },
+  "skippedReason": null,
+  "error": null,
+  "preflight": {
+    "balanceWei": "466452930212399",
+    "gasPriceWei": "6028548",
+    "gasPriceGwei": "0.006",
+    "estGasTotal": "5761026",
+    "estTotalCostWei": "153430621770248"
+  },
+  "totalGasUsed": "2773403",
+  "totalGasPaidWei": "16641101490018",
+  "finishedAt": "2026-11-09T14:25:32.136Z"
+}

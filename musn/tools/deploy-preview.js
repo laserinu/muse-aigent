@@ -7,6 +7,21 @@
 // Usage: node deploy-preview.js
 // Requires: ../grinder/MuseLinuToken.salt.json + ../grinder/MuseLinuFeeCollector.salt.json
 // Reads hook creation code from ../out/MuseLinuHook.sol/MuseLinuHook.json (paris build).
+//
+// HOOK CONSTRUCTOR — the single source of truth is src/MuseLinuHook.sol:91:
+//   (IPoolManager _poolManager, address _token, address _quote,
+//    address _collector, uint24 _fee, int24 _tickSpacing)
+// with _fee = 3000, _tickSpacing = 60. The fork test
+// (script/ForkDeployTest.s.sol) and the calldata builder
+// (script/BuildDeployCalldata.s.sol) encode exactly this order. Any
+// deviation here produces hook addresses that can never exist onchain —
+// that is what happened to the first preview (it encoded 4 addresses in
+// the wrong order and omitted fee/tickSpacing, and the mainnet deploy
+// correctly stopped at pre-flight with $0 spent).
+// BEFORE calling a regenerated preview FINAL, cross-check: the hook
+// initCodeHash printed per chain below MUST equal the forge-computed one
+// (BuildDeployCalldata's require(hook == expectedHook) passing on all four
+// chains, plus an independent cast/Node recomputation). See report §12.
 const fs = require("fs");
 const path = require("path");
 const { encodeAbiParameters, parseAbiParameters, keccak256, concat } = require("viem");
@@ -16,6 +31,17 @@ const FACTORY = "0x4e59b44847b379578588920cA78FbF26c0B4956C"; // Arachnid determ
 const DEAD = "0x000000000000000000000000000000000000dEaD";
 
 // Per-chain V4 + quote addresses (verified 2026-11-09).
+// Tick ranges are DERIVED below from the seed ratio with the VANITY token
+// address (see tickRange()). Never copy ticks from the salt-0 fork runs:
+// the salt-0 token (0xDC32...) is ABOVE the WETH/USDC quotes, the vanity
+// token (0x0000000f...) is BELOW them, so the currency order — and the
+// tick sign — flips on Base and Arc. The first preview carried the stale
+// salt-0 ticks [189420, 193920] / [389220, 393720]; the correct ranges are
+// negative ([-193920, -189420] / [-393720, -389220]). Polygon flipped too
+// when the quote switched from native POL (address(0), token always above
+// it) to WPOL (0x0d50..., token below it): its range is now negative
+// ([-96720, -92220]), DERIVED the same way. See report §12-13.
+const MUSN_AMOUNT = 25_000_000_000_000n * 1_000_000_000n; // 25T, 9 dec
 const CHAINS = {
   base: {
     chainId: 8453,
@@ -29,21 +55,19 @@ const CHAINS = {
     forkAmountNative: 0.000084129071126788, // ETH, fork-reported "amount required"
     nativeUsd: 2105.74,
     nativeSymbol: "ETH",
-    tickLower: 189420, tickUpper: 193920,
   },
   polygon: {
     chainId: 137,
     poolManager: "0x67366782805870060151383F4BbFF9daB53e5cD6",
     positionManager: "0x1Ec2eBf4F37E7363FDfe3551602425af0B3ceef9",
-    quote: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270", // WPOL
-    quoteSymbol: "WPOL (native POL)",
+    quote: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270", // WPOL ("Wrapped Polygon Ecosystem Token", verified onchain; was native POL — Polygon pools standardly use WPOL, report §13)
+    quoteSymbol: "WPOL",
     quoteDecimals: 18,
-    seedQuote: 1980000000000000000n, // 1.98 POL = $0.25
-    forkGas: 7853827,
-    forkAmountNative: 0.060762316447820499, // POL, fork-reported
+    seedQuote: 1980000000000000000n, // 1.98 WPOL = $0.25 (agent holds 2.2667 WPOL; the deploy JSON also wraps 1.98 POL as a fallback)
+    forkGas: 8814289, // WPOL fork total (with-automation; native-POL run was 7,853,827)
+    forkAmountNative: 0.068193075487981, // POL, fork-reported (same ~7.74 gwei implied price as the approved preview)
     nativeUsd: 0.126156,
     nativeSymbol: "POL",
-    tickLower: 92220, tickUpper: 96660,
   },
   arc: {
     chainId: 5042,
@@ -57,7 +81,6 @@ const CHAINS = {
     forkAmountNative: 0.006865875083899686, // USDC, fork-reported
     nativeUsd: 1,
     nativeSymbol: "USDC",
-    tickLower: 389220, tickUpper: 393720,
   },
   robinhood: {
     chainId: 4663,
@@ -71,7 +94,7 @@ const CHAINS = {
     forkAmountNative: 0.000084129071126788, // ETH, Base-shape upper bound
     nativeUsd: 2105.74,
     nativeSymbol: "ETH",
-    tickLower: -887220, tickUpper: 887220, // full range, like $RMUSE
+    fullRange: true, // full range, like $RMUSE
   },
 };
 
@@ -97,6 +120,38 @@ function readSalt(name) {
   return j;
 }
 
+function floorToSpacing(tick, spacing) {
+  const r = tick % spacing; // JS % follows the dividend's sign, like Solidity
+  if (r === 0) return tick;
+  if (tick < 0) return tick - (spacing + r);
+  return tick - r;
+}
+
+function ceilToSpacing(tick, spacing) {
+  const r = tick % spacing;
+  if (r === 0) return tick;
+  if (tick < 0) return tick - r;
+  return tick + (spacing - r);
+}
+
+// Concentrated tick range (±2220 ticks around the seed tick, snapped to
+// spacing 60) — the same computation as _tickRange in
+// script/ForkDeployTest.s.sol and script/BuildDeployCalldata.s.sol.
+// The seed price is quote-per-MUSN when the token is currency0
+// (token < quote) and MUSN-per-quote otherwise; the ORDER DEPENDS ON THE
+// VANITY TOKEN ADDRESS, which is why this is computed, never hardcoded.
+// Double precision is ample here (tick error << 1; the spacing snap
+// absorbs it, and verify-preview.js checks the result against the
+// forge-computed deploy-<chain>.json).
+function tickRange(tokenAddr, quoteAddr, seedQuote, fullRange) {
+  if (fullRange) return [-887220, 887220];
+  const price = tokenAddr.toLowerCase() < quoteAddr.toLowerCase()
+    ? Number(seedQuote) / Number(MUSN_AMOUNT)
+    : Number(MUSN_AMOUNT) / Number(seedQuote);
+  const tick = Math.floor(Math.log(price) / Math.log(1.0001));
+  return [floorToSpacing(tick - 2220, 60), ceilToSpacing(tick + 2220, 60)];
+}
+
 function main() {
   const tokenSalt = readSalt("MuseLinuToken");
   const collectorSalt = readSalt("MuseLinuFeeCollector");
@@ -119,10 +174,14 @@ function main() {
   const hookCreation = hookArtifact.bytecode.object.replace(/^0x/, "");
 
   for (const [name, c] of Object.entries(CHAINS)) {
-    // Hook init code = creation + abi.encode(poolManager, quote, collector, token).
+    // Hook init code = creation + abi.encode(poolManager, token, quote,
+    // collector, fee, tickSpacing) — the constructor order in
+    // src/MuseLinuHook.sol:91. (The first preview encoded only 4 addresses
+    // in the wrong order and omitted fee/tickSpacing; its hook addresses
+    // were unreachable. Do not "simplify" this back.)
     const ctorArgs = encodeAbiParameters(
-      parseAbiParameters("address,address,address,address"),
-      [c.poolManager, c.quote, collectorAddr, tokenAddr]
+      parseAbiParameters("address,address,address,address,uint24,int24"),
+      [c.poolManager, tokenAddr, c.quote, collectorAddr, 3000, 60]
     );
     const initCode = hookCreation + ctorArgs.slice(2);
     const initCodeHash = keccakHex(Buffer.from(initCode, "hex"));
@@ -142,6 +201,8 @@ function main() {
     }
     const hookSaltHex = "0x" + hookSalt.toString(16).padStart(64, "0");
 
+    const [tickLower, tickUpper] = tickRange(tokenAddr, c.quote, c.seedQuote, !!c.fullRange);
+
     // Gas cost estimate — fork-reported native amount (with-automation run,
     // a conservative upper bound; the real deploy has no test swaps or
     // automation dry-run, so it costs less).
@@ -152,7 +213,7 @@ function main() {
     console.log("  collector: " + collectorAddr);
     console.log("  hook:      " + hookAddr + "  salt " + hookSaltHex + " (flags 0xCC)");
     console.log("  hook initCodeHash: " + initCodeHash);
-    console.log("  pool: MUSN/" + c.quoteSymbol + " fee 3000, hook 0xCC, ticks [" + c.tickLower + ", " + c.tickUpper + "]");
+    console.log("  pool: MUSN/" + c.quoteSymbol + " fee 3000, hook 0xCC, ticks [" + tickLower + ", " + tickUpper + "]");
     console.log("  seed: 25T MUSN + " + c.seedQuote.toString() + " " + c.quoteSymbol + " base units (~$0.25)");
     console.log("  deploy tx order:");
     console.log("    1. CREATE2 token (salt " + tokenSalt.salt + ")");
@@ -173,7 +234,7 @@ function main() {
   console.log("- Bridge choice (Relay vs lock/release): open.");
   console.log("- MAINNET GO: NOT authorized — this preview is for the user's final go.");
   console.log("- Dust: the concentrated seed leaves MUSN dust with the deployer");
-  console.log("  (Polygon 5 base units, Base ~104.6B, Arc ~229B). Recommend burning");
+  console.log("  (Polygon ~620.7B, Base ~104.6B, Arc ~229B). Recommend burning");
   console.log("  the dust to the dead address after seeding so deployer holds 0.");
 }
 
