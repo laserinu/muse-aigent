@@ -1,6 +1,6 @@
 // registries.js — curated launchpad + known-rug registries (Part 50).
 //
-// Built 2026-11-08 ~07:35-08:00 WIB under the user's decide-freely
+// Built 2026-11-08 ~07:35-08:00 GMT+7 under the user's decide-freely
 // instruction. This is the one config edit that turns two placeholder
 // guards into live ones:
 //   - `launchpad-provenance` (+5) was 0 for every pool because the registry
@@ -245,7 +245,7 @@ const KNOWN_RUG = {
   deployers: [
     {
       address: "0x333089e07fad944bc5d07f4679af7ace9efec932",
-      reason: "Address-poisoning scammer: lookalike of the user's real wallet 0x3330Cbbb… (same 0x3330 prefix + c932 suffix); sent 5 fake 'POL' to the agent wallet 2026-11-07 19:19 WIB (tx 0x20876649…). User confirmed 2026-11-07 ~19:40 WIB they never sent it.",
+      reason: "Address-poisoning scammer: lookalike of the user's real wallet 0x3330Cbbb… (same 0x3330 prefix + c932 suffix); sent 5 fake 'POL' to the agent wallet 2026-11-07 19:19 GMT+7 (tx 0x20876649…). User confirmed 2026-11-07 ~19:40 GMT+7 they never sent it.",
       source: "~/MEMORY.md (FAKE POL entry); daily log 2026-11-07",
     },
   ],
@@ -253,7 +253,12 @@ const KNOWN_RUG = {
     {
       address: "0xe174c72d8f772838269a4dc5a88ce0cdfcbbc02b",
       reason: "Fake 'PỌL' token (spoof name: P + O-with-combining-dot + L), symbol POL, 18 dec. balanceOf()/totalSupply() REVERT onchain — unreadable/unusable, worth $0. Official POL is 0x455e53… (different address). Never approve, swap, or interact.",
-      source: "~/MEMORY.md (FAKE POL entry); verified onchain 2026-11-07 ~19:27 WIB",
+      source: "~/MEMORY.md (FAKE POL entry); verified onchain 2026-11-07 ~19:27 GMT+7",
+    },
+    {
+      address: "0x81adcf231fec5f8543629ed00a190b18b463662b",
+      reason: "USER-BLOCKED 2026-11-09 ~23:08 GMT+7 (user: 'Block the BANK token' / 'Do not buy it again') — NOT a scam verdict: BANK passed every safety gate (GoPlus clean, holders clean, transfer-sim pass) on all 5 copy-buys. Blocked because every copy round trip loses ~$0.036 to gas (last one 23:03 GMT+7: bought 2,081.47 BANK for $0.02, mirror-sold at 0.81x, net -$0.036; real break-even 2.62x). The copy-trader and the v2 evaluator must never buy this token again.",
+      source: "copy-trade-LOG.md 2026-11-09; user order in main chat 2026-11-09 ~23:08 GMT+7",
     },
   ],
 };

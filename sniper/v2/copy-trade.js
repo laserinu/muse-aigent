@@ -773,6 +773,23 @@ function assertCopyLiveAllowed(state, opts) {
 }
 
 // Execute a built buy (V4, V4-native, or V3) — only after assertCopyLiveAllowed.
+// Part 76 (2026-11-10): ACTUAL amountOut from the balance delta.
+// IFSO proved the announced estimate can be far from reality (announced
+// 495.40, the receipt delivered 310.93): the runner recorded only
+// amountOutMinimum, never what the buy actually delivered. The balance
+// delta (after − before) is exact, works for V4 and V3-helper paths,
+// and needs no receipt parsing. Pure + fail-open: null in, null out —
+// a failed balance read must never block a buy.
+function actualAmountOut(balBefore, balAfter) {
+  if (balBefore === null || balBefore === undefined || balAfter === null || balAfter === undefined) return null;
+  try {
+    const before = BigInt(balBefore);
+    const after = BigInt(balAfter);
+    if (after <= before) return null;
+    return after - before;
+  } catch { return null; }
+}
+
 async function executeCopyBuy(state, built, opts = {}) {
   assertCopyLiveAllowed(state, opts);
   const chain = getChain();
@@ -935,6 +952,6 @@ module.exports = {
   ZERO_ADDRESS, NATIVE_ETH_QUOTE, ETH_USD_FALLBACK, getEthUsd,
   fetchGmgnFeed, detectCandidates, detectSellCandidates, findInitialize, verifyCandidate,
   scanOnchainBuys, gateToken, gateHoldersWithRetry, buildCopyBuy, buildCopySell,
-  assertCopyLiveAllowed, assertMirrorExitAllowed, executeCopyBuy, executeCopySell, executeMirrorSell, simSellRoute,
+  assertCopyLiveAllowed, assertMirrorExitAllowed, executeCopyBuy, executeCopySell, executeMirrorSell, simSellRoute, actualAmountOut,
   feeBreakdown, gasUsd, checkPoolFeeSane, DYNAMIC_FEE_FLAG, MAX_SANE_POOL_FEE, ERC20_MIN_ABI, TRANSFER_ABI,
 };

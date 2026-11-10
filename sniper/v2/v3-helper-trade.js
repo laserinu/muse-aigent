@@ -1,5 +1,5 @@
 // v3-helper-trade.js — V3 execution via the V3SwapHelper contract
-// (Robinhood Chain only). Built 2026-11-08 ~03:38 WIB for the live V3
+// (Robinhood Chain only). Built 2026-11-08 ~03:38 GMT+7 for the live V3
 // wiring (separate V3 cap of 5, user delegated the decision to the parent).
 //
 // The PROVEN V3 path (report ~/workspace/research_notes/v3-helper-contract-20261108-0326/report.md,

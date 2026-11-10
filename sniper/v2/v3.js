@@ -1,6 +1,6 @@
 // v3.js — Sniper v2 V3 pool watching (Robinhood Chain only, DRY-RUN ONLY).
 //
-// Built 2026-11-08 ~02:50 WIB after the user approved "build V3 watching for
+// Built 2026-11-08 ~02:50 GMT+7 after the user approved "build V3 watching for
 // Pons launches". Pons v1 launches go into Uniswap V3 WETH pools — neither
 // sniper watched V3, so they were missed at birth. This module adds V3
 // detection + evaluation to the v2 stack. It READS ONLY: no transactions,
@@ -66,7 +66,7 @@ const social = require("./social.js");
 const trade = require("./trade.js"); // buyAmountInQuote for the min-500 gate (no cycle: trade requires only chains)
 
 // Minimum whole tokens a $0.02 buy must yield (user decision 2026-11-08,
-// Part 51; LOOSENED 500 -> 250 on 2026-11-09 ~14:05 WIB — pre-agreed gate
+// Part 51; LOOSENED 500 -> 250 on 2026-11-09 ~14:05 GMT+7 — pre-agreed gate
 // review after the v1-five verdicts: 5/5 survived (debtdog +50%, other four
 // sold at ~-2%). $0.02 / 250 = price ceiling ~$0.00008/token at our size.
 // Hard gates added 2026-11-08 (Part 51), same as evaluate.js:
@@ -407,7 +407,7 @@ async function evaluateV3Pool(cfg, chain, pool) {
     result.reason = "transfer simulation reverted (honeypot)"; return result;
   }
 
-  // Token-age gate (hard veto, Part 51 — user decision 2026-11-08 ~07:42 WIB).
+  // Token-age gate (hard veto, Part 51 — user decision 2026-11-08 ~07:42 GMT+7).
   // Only buy tokens whose FIRST pool is < 24h old. Fail-open: age unknown
   // -> allow, logged. TOKEN_AGE_ENABLED=0 disables the check (testing).
   if (process.env.TOKEN_AGE_ENABLED !== "0") {
@@ -429,7 +429,7 @@ async function evaluateV3Pool(cfg, chain, pool) {
   }
 
   // Minimum-500-tokens rule (hard gate, Part 51 — user decision 2026-11-08
-  // ~07:45 WIB). The $0.02 buy must yield >= 500 whole tokens. V3 has no
+  // ~07:45 GMT+7). The $0.02 buy must yield >= 500 whole tokens. V3 has no
   // working quoter on Robinhood, so the estimate is the slot0 spot price
   // (result.spotQuotePerToken, computed above from v3PriceFromSqrt — now
   // fixed in chains.js; it ignores fees/hook taxes and price impact, so it

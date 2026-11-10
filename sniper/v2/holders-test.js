@@ -158,10 +158,10 @@ async function poolCreationBlock(chainId, poolId, window = null) {
   // Window 300k (was 100k): APU's pool is now ~6h old (~210k blocks back
   // at ~10 blocks/s), so the 100k window no longer reaches its creation
   // block and poolCreationBlock threw "pool Initialize log not found"
-  // (2026-11-08 ~10:55 WIB). 300k still keeps the scan fast.
+  // (2026-11-08 ~10:55 GMT+7). 300k still keeps the scan fast.
   // timeoutMs 120000 (was the 12s default): APU's pool is now ~210k
   // blocks back, and the Transfer-log reconstruction over that range
-  // exceeds 12s — the control timed out (fail-open) on 2026-11-08 ~11:05 WIB.
+  // exceeds 12s — the control timed out (fail-open) on 2026-11-08 ~11:05 GMT+7.
   {
     const { chain, client, block } = await poolCreationBlock(4663, "0x4070354baee808ec2b0953ef4b96841a013fb2b209c9185d9240d80f3f8c716c", 300000);
     const r = await holders.scoreHolders(chain, "0x712cc5141a1d10109fee62e8d61e175fe5ef96bf", {

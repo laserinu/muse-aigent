@@ -49,7 +49,7 @@
 //                           against launchpad hooks; curated 2026-11-08,
 //                           Part 50; unknown launchpad = 0, never negative)
 // Thresholds: >=70 full size, 45-69 half size, <45 watch only. Buy line
-// lowered 50 -> 45 by user decision 2026-11-08 ~01:30 WIB (hooked pools cap
+// lowered 50 -> 45 by user decision 2026-11-08 ~01:30 GMT+7 (hooked pools cap
 // at 45 at T+0: liquidity-depth partial credit 5/15 + lp-locked/early-traction
 // structurally 0 at birth). Configured in config.json scoreThresholds.half.
 //
@@ -62,7 +62,7 @@ const social = require("./social.js");
 const trade = require("./trade.js"); // buyAmountInQuote + spotOutput for the min-500 gate (no cycle: trade requires only chains)
 
 // Minimum whole tokens a $0.02 buy must yield (user decision 2026-11-08,
-// Part 51; LOOSENED 500 -> 250 on 2026-11-09 ~14:05 WIB — pre-agreed gate
+// Part 51; LOOSENED 500 -> 250 on 2026-11-09 ~14:05 GMT+7 — pre-agreed gate
 // review after the v1-five verdicts: 5/5 survived (debtdog +50%, other four
 // sold at ~-2%), so min-500 -> 250. $0.02 / 250 = price ceiling
 // ~$0.00008/token at our size. Age gate and score line UNCHANGED.)
@@ -317,7 +317,7 @@ async function evaluatePool(cfg, chain, pool) {
   }
 
   // Check 8: token-age gate (hard veto, Part 51 — user decision 2026-11-08
-  // ~07:42 WIB). Only buy tokens whose FIRST pool is < 24h old. Placed
+  // ~07:42 GMT+7). Only buy tokens whose FIRST pool is < 24h old. Placed
   // AFTER the honeypot sim so tokens failing cheap gates never cost an
   // indexer call. Fail-open: age unknown -> allow, logged — never stall
   // the watcher. TOKEN_AGE_ENABLED=0 disables the check (testing/escape).
@@ -340,7 +340,7 @@ async function evaluatePool(cfg, chain, pool) {
   }
 
   // Check 9: minimum-500-tokens rule (hard gate, Part 51 — user decision
-  // 2026-11-08 ~07:45 WIB). The $0.02 buy must yield >= 500 whole tokens.
+  // 2026-11-08 ~07:45 GMT+7). The $0.02 buy must yield >= 500 whole tokens.
   // Expected output at the REAL buy size: quoter first (includes fees and
   // hook taxes), spot fallback via trade.spotOutput when the quoter reverts
   // on a hooked pool. Unresolvable output (0/unknown) also skips — if we

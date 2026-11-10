@@ -1,4 +1,4 @@
-// sell-all.js — sell ALL of every open v1 position (user-approved 2026-11-08 ~02:24 WIB).
+// sell-all.js — sell ALL of every open v1 position (user-approved 2026-11-08 ~02:24 GMT+7).
 // The five positions are dead launches (0 trades in 6h on Dexscreener); selling frees
 // all five slots for new snipes. The v1 watcher cron must be PAUSED before running
 // this, or its STATE.json save can clobber the soldAll flags.

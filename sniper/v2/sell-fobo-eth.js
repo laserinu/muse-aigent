@@ -1,5 +1,5 @@
 // One-off manual sell: ALL FOBO -> native ETH via the deep FOBO/ETH V4 pool
-// (user order 2026-11-08 ~07:48 WIB, "For USD" — ETH is converted to USDG after).
+// (user order 2026-11-08 ~07:48 GMT+7, "For USD" — ETH is converted to USDG after).
 // Why this pool: the FOBO/USDG pool we bought into has ZERO liquidity now
 // (extsload liq = 0, verified against the healthy WETH/USDG + FOBO/ETH pools)
 // — the LP was pulled after our buy, so the direct USDG sell reverts.

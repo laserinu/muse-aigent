@@ -1,6 +1,6 @@
 // token-age.js — first-pool age check for the token-age gate (Part 51).
 //
-// User decision 2026-11-08 ~07:42 WIB: only buy a token whose FIRST pool
+// User decision 2026-11-08 ~07:42 GMT+7: only buy a token whose FIRST pool
 // (any quote, any DEX) was created < 24h before evaluation. The sniper
 // triggers on new POOLS, not new tokens — FOBO's token is ~13 days old
 // (first pool 2026-10-26) but the USDG pool bought was 2 min old, and

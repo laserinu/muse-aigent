@@ -28,7 +28,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { createPublicClient, http } = require("/home/hatch/workspace/privy/agent-cli/node_modules/viem");
+const { createPublicClient, http, formatUnits } = require("/home/hatch/workspace/privy/agent-cli/node_modules/viem");
 const chains = require("./chains.js");
 const trade = require("./trade.js");
 const v3mod = require("./v3.js");
@@ -276,9 +276,24 @@ async function handleCandidate(client, state, cand, live) {
     return "would-buy";
   }
   // LIVE: execute, then immediately sim the sell route.
+  // Part 76 (2026-11-10): read the balance BEFORE the buy so the
+  // ACTUAL received amount can be recorded (IFSO lesson: the announced
+  // estimate was 495.40, the receipt delivered 310.93). Fail-open: a
+  // failed read leaves balBefore null and the buy still proceeds.
+  let balBefore = null;
+  try {
+    balBefore = await client.readContract({ address: verified.token, abi: ct.ERC20_MIN_ABI, functionName: "balanceOf", args: [cfg.agent] });
+  } catch { balBefore = null; }
   try {
     const exec = await ct.executeCopyBuy(state, built, { liveConfirm: true });
     const buyPrice = await currentPrice(client, verified);
+    // Post-buy balance — feeds both the actual-amount record and the
+    // sell-route sim below (previously read only for the sim).
+    let bal = null;
+    try {
+      bal = await client.readContract({ address: verified.token, abi: ct.ERC20_MIN_ABI, functionName: "balanceOf", args: [cfg.agent] });
+    } catch { bal = null; }
+    const amountOut = ct.actualAmountOut(balBefore, bal);
     const pos = {
       token: verified.token, symbol: verified.symbol, decimals: verified.decimals,
       poolType: verified.poolType, pool: verified.pool, poolKey: verified.poolKey || null,
@@ -287,14 +302,16 @@ async function handleCandidate(client, state, cand, live) {
       wallet: verified.wallet, txHash: verified.txHash, buyTxHash: exec.map((r) => r.hash).join(","),
       buyPriceQuotePerToken: buyPrice, buyPriceSource: "post-buy-pool",
       amountInRaw: built.amountIn, amountOutMinimum: built.amountOutMinimum,
+      amountOut: amountOut === null ? null : amountOut.toString(),
+      amountOutSource: amountOut === null ? "unknown" : "balance-delta",
       soldHalf: false, soldAll: false, sellBlocked: false, at: new Date().toISOString(),
     };
     state.positions.push(pos);
     state.copySnipesDone = (state.copySnipesDone || 0) + 1;
-    log(`${tag} BOUGHT $0.02 (copy of ${verified.wallet.slice(0, 10)}...). Txs: ${exec.map((r) => r.hash).join(", ")}`);
+    const amountOutHuman = amountOut === null ? "?" : formatUnits(amountOut, verified.decimals).replace(/(\.\d{4})\d+$/, "$1");
+    log(`${tag} BOUGHT $0.02 → ${amountOutHuman} ${verified.symbol} (copy of ${verified.wallet.slice(0, 10)}...). Txs: ${exec.map((r) => r.hash).join(", ")}`);
     // Post-buy sell-route sim (debtdog gap).
-    const bal = await client.readContract({ address: verified.token, abi: ct.ERC20_MIN_ABI, functionName: "balanceOf", args: [cfg.agent] });
-    if (bal > 0n) {
+    if (bal !== null && bal > 0n) {
       const sim = await ct.simSellRoute(client, CHAIN, pos, bal);
       if (!sim.ok) {
         pos.sellBlocked = true;
@@ -303,7 +320,7 @@ async function handleCandidate(client, state, cand, live) {
         log(`${tag} post-buy sell-route sim OK: ${sim.detail}`);
       }
     }
-    state.candidates.push({ txHash: cand.txHash, wallet: cand.wallet, token: cand.token, symbol: cand.symbol, outcome: "bought", poolType: verified.poolType, at: new Date().toISOString() });
+    state.candidates.push({ txHash: cand.txHash, wallet: cand.wallet, token: cand.token, symbol: cand.symbol, outcome: "bought", poolType: verified.poolType, amountOut: amountOut === null ? null : amountOut.toString(), at: new Date().toISOString() });
     return "bought";
   } catch (e) {
     log(`${tag} LIVE BUY FAILED: ${e.message.slice(0, 200)}`);

@@ -1,6 +1,6 @@
 // sell-ant-now.js — ONE-OFF sell of the agent wallet's 120,000 ANT (dust
 // airdrop from the "Anthropic" impersonation token) via the proven V3SwapHelper.
-// User order 2026-11-08 ~09:11 WIB: "Sell it all for ~$16".
+// User order 2026-11-08 ~09:11 GMT+7: "Sell it all for ~$16".
 //
 // Route: transfer ANT -> helper -> helper.swapExactInputSingle(ANT/WETH 1%
 // V3 pool) -> WETH straight back to the agent wallet in the same tx.

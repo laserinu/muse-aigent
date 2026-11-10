@@ -39,7 +39,7 @@
 // router) and Arc (0x4fcA…), where it is PROVEN live. Base and Polygon
 // point at Universal Router V2 (Base 0x6ff5…, Polygon 0x1095…) and use
 // buildRouterExecuteV2 (5-field params, no minHopPriceX36) — PROVEN
-// 2026-11-07 ~19:22–19:35 WIB via eth_call on liquid pools
+// 2026-11-07 ~19:22–19:35 GMT+7 via eth_call on liquid pools
 // (AllowanceExpired = swap executed; V1 encoding reverts bare-empty on V2).
 // The selector is chain.routerVersion === 2 (see buildRouterExecuteFor).
 // Polygon encoding proof (dry-run 2026-11-07, see DRY-RUN-TEST.md
@@ -73,7 +73,7 @@ const quoterAbi = parseAbi([
 // Per-quote approxUsdPrice in config.json takes PRECEDENCE over this map
 // (every expanded quote carries one, incl. all 203 Robinhood stocks + 7 B20).
 // Prices refreshed 2026-11-07: BTC $75,905, ETH $2,243 (CoinGecko).
-// POL/WPOL refreshed 2026-11-07 ~19:05 WIB: $0.0905 (live onchain — Uniswap
+// POL/WPOL refreshed 2026-11-07 ~19:05 GMT+7: $0.0905 (live onchain — Uniswap
 // WPOL/USDT0 $0.09054, Dooar $0.09143, QuickSwap $0.09072; CoinGecko's
 // $0.126 lags). The old 0.2 was badly stale: at 0.2 a $0.02 buy sized to
 // 0.1 POL = only ~$0.009 of real value. POL is Polygon's buy principal, so
@@ -207,7 +207,7 @@ function buildRouterExecute(chain, poolKey, zeroForOne, amountIn, amountOutMinim
 }
 
 // V2 router encoding (Universal Router V2: Base 0x6ff5…, Polygon 0x1095…).
-// PROVEN 2026-11-07 ~19:22–19:35 WIB (see DRY-RUN-TEST.md "Router V2
+// PROVEN 2026-11-07 ~19:22–19:35 GMT+7 (see DRY-RUN-TEST.md "Router V2
 // encoding"): the ONLY structural difference from v1 is that V2's
 // ExactInputSingleParams has NO minHopPriceX36 field (5 fields, not 6).
 // Everything else is identical: same execute() selector, command 0x10,

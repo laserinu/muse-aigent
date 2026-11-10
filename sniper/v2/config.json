@@ -217,7 +217,7 @@
       "dexscreenerSlug": "polygon",
       "enabled": true,
       "executionBlocked": false,
-      "executionBlockedReason": "Cleared 2026-11-07 ~19:35 WIB — V2 router encoding PROVEN (eth_call AllowanceExpired on GRT/USDT0) + sign+broadcast path proven 4/4; Polygon live per user Go 19:01 + fix-all 19:25.",
+      "executionBlockedReason": "Cleared 2026-11-07 ~19:35 GMT+7 — V2 router encoding PROVEN (eth_call AllowanceExpired on GRT/USDT0) + sign+broadcast path proven 4/4; Polygon live per user Go 19:01 + fix-all 19:25.",
       "gasNote": "Polygon gas spikes to 200+ gwei; buy only when gas is low.",
       "geckoSlug": "polygon_pos",
       "live": true,
@@ -277,7 +277,7 @@
       "rpc": "https://polygon-bor-rpc.publicnode.com",
       "rpcNote": "polygon-rpc.com is DEAD (403 tenant disabled) — use publicnode.",
       "universalRouter": "0x1095692a6237d83c6a72f3f5efedb9a670c49223",
-      "universalRouterNote": "V2 router (current per Uniswap docs), code 19499B, poolManager() = Polygon V4 PoolManager 0x6736…. V2 encoding (5-field ExactInputSingleParams, no minHopPriceX36) PROVEN 2026-11-07 via eth_call (AllowanceExpired) on GRT/USDT0 + sign-path test. Live since 2026-11-07 ~19:35 WIB.",
+      "universalRouterNote": "V2 router (current per Uniswap docs), code 19499B, poolManager() = Polygon V4 PoolManager 0x6736…. V2 encoding (5-field ExactInputSingleParams, no minHopPriceX36) PROVEN 2026-11-07 via eth_call (AllowanceExpired) on GRT/USDT0 + sign-path test. Live since 2026-11-07 ~19:35 GMT+7.",
       "universalRouterV2": "0x1095692a6237d83c6a72f3f5efedb9a670c49223",
       "universalRouterV2Note": "Now the active universalRouter (see above).",
       "v4Quoter": "0xb3d5c3dfc3a7aebff71895a7191796bffc2c81b9",
@@ -2601,7 +2601,7 @@
       ],
       "rpc": "https://base-rpc.publicnode.com",
       "universalRouter": "0x6ff5693b99212da76ad316178a184ab56d299b43",
-      "universalRouterNote": "V2 router (current per Uniswap docs), code 19499B, poolManager() = Base V4 PoolManager 0x4985…. V2 encoding PROVEN 2026-11-07 via eth_call (AllowanceExpired) on USDC/PEPE. Live since 2026-11-07 ~19:35 WIB.",
+      "universalRouterNote": "V2 router (current per Uniswap docs), code 19499B, poolManager() = Base V4 PoolManager 0x4985…. V2 encoding PROVEN 2026-11-07 via eth_call (AllowanceExpired) on USDC/PEPE. Live since 2026-11-07 ~19:35 GMT+7.",
       "universalRouterV2": "0x6ff5693b99212da76ad316178a184ab56d299b43",
       "universalRouterV2Note": "Now the active universalRouter (see above).",
       "v4Quoter": "0x0d5e0f971ed27fbff6c2837bf31316121532048d",
@@ -2709,7 +2709,7 @@
       }
     }
   },
-  "description": "Sniper v2 — chain-agnostic, config-driven. ANY EVM chain can be added by adding one entry under 'chains' (see README.md 'Adding a new EVM chain'). No code change needed. Solana is NOT EVM and is out of scope. USER RULE (updated 2026-11-07 ~17:39/17:42 WIB): user said Go for live v2 sniping on Arc, Base AND Robinhood — three chains live at once, superseding the earlier one-chain-at-a-time (Robinhood first) rule. Buys stay small (v1 size, ~$0.02 each). Cap 5 per chain; funded counts are enforced via STATE.json snipesDone (Arc 3 of 5, Base 5 of 5, Robinhood 1 of 5). EXPANDED QUOTES (2026-11-07): quotes marked expanded:true (all verified tokens + tokenized stocks) are usable only when expandedQuotesEnabled=true. Live Go given 2026-11-07 ~18:25 WIB for Arc/Base/Robinhood once dry-run passes; Polygon execution-blocked, Phase 2 chains stay disabled. A failed verification keeps that chain/token gated off — the Go does not override a failed check.",
+  "description": "Sniper v2 — chain-agnostic, config-driven. ANY EVM chain can be added by adding one entry under 'chains' (see README.md 'Adding a new EVM chain'). No code change needed. Solana is NOT EVM and is out of scope. USER RULE (updated 2026-11-07 ~17:39/17:42 GMT+7): user said Go for live v2 sniping on Arc, Base AND Robinhood — three chains live at once, superseding the earlier one-chain-at-a-time (Robinhood first) rule. Buys stay small (v1 size, ~$0.02 each). Cap 5 per chain; funded counts are enforced via STATE.json snipesDone (Arc 3 of 5, Base 5 of 5, Robinhood 1 of 5). EXPANDED QUOTES (2026-11-07): quotes marked expanded:true (all verified tokens + tokenized stocks) are usable only when expandedQuotesEnabled=true. Live Go given 2026-11-07 ~18:25 GMT+7 for Arc/Base/Robinhood once dry-run passes; Polygon execution-blocked, Phase 2 chains stay disabled. A failed verification keeps that chain/token gated off — the Go does not override a failed check.",
   "knownRugDeployers": [],
   "knownTokens": [
     "PEPE",
@@ -2963,7 +2963,7 @@
     "maxSwapLogs": 1000,
     "maxTxFetches": 1000,
     "txBatchSize": 50,
-    "note": "Smart-wallet buy signal (Part 55, 2026-11-09 — user tapped 'Build the signal'). +10 when >=1 watchlisted wallet (smart-money-watchlist.json, 8 wallets, Part 54) bought the token and still holds it; +15 when >=2. Detection reads the pool's Swap events onchain and checks each swap tx's `from` (the Swap sender is the router). Scoring ONLY — the token must still pass every gate. SMART_MONEY_ENABLED=0 disables it. Re-rank the watchlist monthly (Part 54 method). Batch fix 2026-11-09 ~07:20 WIB: tx `from` lookups are JSON-RPC batched (50/call, verified on Robinhood RPC); busy pools are sampled from BOTH ends (newest + oldest) so a birth buy is not dropped by the log cap (Debtcat: 404 swaps in 30 min, #4's buy was the first)."
+    "note": "Smart-wallet buy signal (Part 55, 2026-11-09 — user tapped 'Build the signal'). +10 when >=1 watchlisted wallet (smart-money-watchlist.json, 8 wallets, Part 54) bought the token and still holds it; +15 when >=2. Detection reads the pool's Swap events onchain and checks each swap tx's `from` (the Swap sender is the router). Scoring ONLY — the token must still pass every gate. SMART_MONEY_ENABLED=0 disables it. Re-rank the watchlist monthly (Part 54 method). Batch fix 2026-11-09 ~07:20 GMT+7: tx `from` lookups are JSON-RPC batched (50/call, verified on Robinhood RPC); busy pools are sampled from BOTH ends (newest + oldest) so a birth buy is not dropped by the log cap (Debtcat: 404 swaps in 30 min, #4's buy was the first)."
   },
   "sellAllAt": -0.5,
   "sellHalfAt": 1,

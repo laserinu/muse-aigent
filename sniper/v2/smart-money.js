@@ -1,6 +1,6 @@
 // smart-money.js — smart-wallet buy signal for the snipers (Part 55).
 //
-// Built 2026-11-09 (user tapped "Build the signal" ~06:44 WIB — Option A
+// Built 2026-11-09 (user tapped "Build the signal" ~06:44 GMT+7 — Option A
 // from the Part 54 copy-trade research). A watchlisted wallet's buy of the
 // token is a SCORING SIGNAL inside the existing evaluators, never a buy
 // trigger: the token must still pass EVERY gate (token-age, min-500,

@@ -11,7 +11,7 @@
 //      canonical 0x105ac8df... appears nowhere on our chains).
 //   2. MCAT (V4, POSITIVE) — #4 (0xe1d16068...) bought MCAT at block
 //      109601629 in V4 pool 0xddca8f9b... and STILL HOLDS (balance
-//      432,564,252,359,008,400,234,240 verified 2026-11-09 ~07:10 WIB).
+//      432,564,252,359,008,400,234,240 verified 2026-11-09 ~07:10 GMT+7).
 //      Expect +10 if the buy is <24h old, +5 if 24-48h (age computed
 //      live, not hardcoded).
 //   3. Debtcat (V4, HOLD GUARD) — #4 bought Debtcat at block 109603936

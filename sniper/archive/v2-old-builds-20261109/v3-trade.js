@@ -1,12 +1,12 @@
 // v3-trade.js — V3 execution for sniper v2 (Robinhood Chain only).
 //
-// ⚠️ CORRECTION 2026-11-08 ~03:40 WIB: the Universal Router command 0x00
+// ⚠️ CORRECTION 2026-11-08 ~03:40 GMT+7: the Universal Router command 0x00
 // path described below is DEAD for EOAs on the Robinhood fork — the live
 // micro-test (report ~/workspace/research_notes/pons-v3-execution-microtest-20261108-0305/report.md,
 // tools-and-sites Part 40) proved the router execute reverts bare at
 // broadcast. Do NOT use buildV3Buy/buildV3Sell in this file.
 // The PROVEN V3 path is the V3SwapHelper contract
-// 0x3ecc88CBaD515D4F34dD365A109Cb7bB71a2FfcF (deployed 2026-11-08 ~03:33 WIB,
+// 0x3ecc88CBaD515D4F34dD365A109Cb7bB71a2FfcF (deployed 2026-11-08 ~03:33 GMT+7,
 // Sourcify exact_match; report ~/workspace/research_notes/v3-helper-contract-20261108-0326/report.md,
 // tools-and-sites Part 42): it calls pool.swap() directly and pays the
 // pool in uniswapV3SwapCallback. Use the helper, not the UR builders here.

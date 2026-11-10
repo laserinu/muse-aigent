@@ -1,4 +1,4 @@
-// One-off manual sell: ALL FOBO -> USDG on Robinhood (user order 2026-11-08 ~07:48 WIB).
+// One-off manual sell: ALL FOBO -> USDG on Robinhood (user order 2026-11-08 ~07:48 GMT+7).
 // Reuses trade.buildSell / trade.executeTxs (same path the runner's sell-all uses).
 // Records the result in STATE.json (soldAll) and LOG.md.
 const fs = require("fs");

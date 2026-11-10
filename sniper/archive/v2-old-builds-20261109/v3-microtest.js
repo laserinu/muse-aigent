@@ -1,6 +1,6 @@
 // v3-microtest.js — LIVE micro-test of the V3 execution path (Robinhood).
 //
-// User-approved 2026-11-08 ~03:04 WIB ("Yes, build the V3 execution
+// User-approved 2026-11-08 ~03:04 GMT+7 ("Yes, build the V3 execution
 // path + micro-test"). Buys a TINY amount of DELTA (0.00001 ETH, the
 // normal sniper buy size — NEVER more) through the V3 pool via Universal
 // Router command 0x00, then sells it back through the same path.
