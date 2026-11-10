@@ -31,9 +31,12 @@
 //     same proven builders. Gated behind state.mirrorExit (default
 //     false, NEVER flipped by this module) — the runner logs
 //     SELL-SIGNAL-SKIP while it is off. A sell signal ATTEMPTS the
-//     sell even on a sellBlocked position: the flag can false-positive
-//     (simSellRoute reverts on a fresh position with no allowances),
-//     and a real sell attempt is the only proof the hook really blocks.
+//     sell even on a sellBlocked position: the flag used to false-positive
+//     (simSellRoute reverted on a fresh position with no allowances —
+//     TAFO/FAWBO/BANK were flagged but sold fine for real). Fixed
+//     2026-11-11: the sim now checks allowances/helper funding first and
+//     returns inconclusive instead of flagging, so only a revert WITH the
+//     preconditions in place proves the hook really blocks.
 //   * HARD LIMIT: no live transaction leaves this module unless
 //     state.live === true AND opts.liveConfirm === true. The runner
 //     (copy-trade-run.js) defaults to DRY-RUN. The live cron is NOT
@@ -132,10 +135,14 @@ const QUOTER_ABI = parseAbi([
 const TRANSFER_ABI = parseAbi(["function transfer(address to, uint256 amount) returns (bool)"]);
 const ERC20_MIN_ABI = parseAbi([
   "function balanceOf(address) view returns (uint256)",
+  "function allowance(address owner, address spender) view returns (uint256)",
   "function totalSupply() view returns (uint256)",
   "function decimals() view returns (uint8)",
   "function symbol() view returns (string)",
   "function name() view returns (string)",
+]);
+const PERMIT2_ALLOWANCE_ABI = parseAbi([
+  "function allowance(address owner, address token, address spender) view returns (uint160 amount, uint48 expiration, uint48 nonce)",
 ]);
 const HELPER_SWAP_ABI = parseAbi([
   "function swapExactInputSingle(address pool, address tokenIn, address tokenOut, uint256 amountIn, uint256 amountOutMinimum) returns (uint256 amountOut)",
@@ -841,14 +848,60 @@ async function executeMirrorSell(state, built, opts = {}) {
 // pool's hook blocks OUR sell route — flag the position sellBlocked
 // immediately. This CANNOT be run pre-buy (the agent holds 0 and has
 // no allowances then).
+//
+// FALSE-POSITIVE FIX (2026-11-11): the sim used to go straight to the
+// router execute / helper swap without checking the preconditions the
+// real sell sets up first. A V4 sell is 3 txs (approve token->Permit2,
+// Permit2 approve token->Router, router execute); the sim only ran the
+// execute, so on a fresh position with no token allowance it reverted
+// and wrongly flagged sellBlocked — proven by TAFO/FAWBO/BANK, all
+// flagged sellBlocked but sold fine for real. A V3 sell is 2 txs
+// (transfer token->helper, helper swap); the sim only ran the swap, so
+// with an unfunded helper it reverted for the same reason. The sim now
+// checks the preconditions FIRST and returns inconclusive (NOT
+// sellBlocked) when they are not met — only a revert WITH the
+// preconditions in place proves the hook blocks.
 async function simSellRoute(client, chain, position, amountRaw) {
   try {
     if (position.poolType === "v4") {
+      // Precondition 1: token allowance to Permit2 must cover the amount.
+      // Precondition 2: Permit2's allowance to the router must cover the
+      // amount and not be expired. If either is short, the execute sim
+      // would revert on allowance, not on the hook — inconclusive.
+      const erc20Allowance = await client.readContract({
+        address: position.token, abi: ERC20_MIN_ABI, functionName: "allowance",
+        args: [cfg.agent, chain.permit2],
+      });
+      if (erc20Allowance < amountRaw) {
+        return { ok: false, inconclusive: true, reason: `sell-route sim INCONCLUSIVE: token allowance to Permit2 is ${erc20Allowance} < ${amountRaw} (fresh position, approve tx not run yet) — not proof the hook blocks` };
+      }
+      const [p2Amount, p2Expiration] = await client.readContract({
+        address: chain.permit2, abi: PERMIT2_ALLOWANCE_ABI, functionName: "allowance",
+        args: [cfg.agent, position.token, chain.universalRouter],
+      });
+      const now = BigInt(Math.floor(Date.now() / 1000));
+      if (p2Amount < amountRaw || p2Expiration <= now) {
+        return { ok: false, inconclusive: true, reason: `sell-route sim INCONCLUSIVE: Permit2 allowance to router is ${p2Amount} (exp ${p2Expiration}) < ${amountRaw} or expired — not proof the hook blocks` };
+      }
       const poolKey = position.poolKey;
       const zeroForOne = lc(poolKey.currency0) === lc(position.token);
       const { data } = trade.buildRouterExecuteFor(chain, poolKey, zeroForOne, amountRaw, 1n, position.token, position.quoteInfo.address);
-      await client.call({ account: cfg.agent, to: chain.universalRouter, data, value: 0n });
+      try {
+        await client.call({ account: cfg.agent, to: chain.universalRouter, data, value: 0n });
+      } catch (e) {
+        return { ok: false, reason: "sell-route sim REVERTED with allowances in place (hook blocks our sell, debtdog-style): " + e.message.slice(0, 150) };
+      }
       return { ok: true, detail: "sell-route sim SUCCEEDED (router execute, minOut=1)" };
+    }
+    // V3: precondition is the helper holding the token (the real sell
+    // funds it first via transfer). If the helper is unfunded, the swap
+    // sim would revert on balance, not on the hook — inconclusive.
+    const helperBal = await client.readContract({
+      address: position.token, abi: ERC20_MIN_ABI, functionName: "balanceOf",
+      args: [v3helper.HELPER],
+    });
+    if (helperBal < amountRaw) {
+      return { ok: false, inconclusive: true, reason: `sell-route sim INCONCLUSIVE: helper holds ${helperBal} < ${amountRaw} of the token (fund tx not run yet) — not proof the hook blocks` };
     }
     // V3: sim the helper swap tx as built (minOut = spot x 0.80, read
     // fresh). A revert here is most likely the hook; retry once with a
@@ -862,7 +915,7 @@ async function simSellRoute(client, chain, position, amountRaw) {
         return { ok: true, detail: "sell-route sim SUCCEEDED (helper swap)" };
       } catch (e) {
         if (attempt === 0) continue;
-        return { ok: false, reason: "sell-route sim REVERTED (hook blocks our helper sell, debtdog-style): " + e.message.slice(0, 150) };
+        return { ok: false, reason: "sell-route sim REVERTED with helper funded (hook blocks our helper sell, debtdog-style): " + e.message.slice(0, 150) };
       }
     }
     return { ok: false, reason: "sell-route sim failed" };

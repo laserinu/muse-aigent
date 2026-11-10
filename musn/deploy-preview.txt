@@ -1,82 +1,72 @@
-=== MUSN DEPLOY PREVIEW ===
+=== MUSN DEPLOY — LIVE STATUS ===
 Token:    0x0000000fc9a3c921ca909d84ae404a9ccaef4479  salt 0x00000000000000000000000000000000000000000000000000000000ff37a90a
 Collector:0x0000000f64352eb1bacef4d9d5cae00f505a149e  salt 0x00000000000000000000000000000000000000000000000000000001e52c2dc6
 Factory:  0x4e59b44847b379578588920cA78FbF26c0B4956C (Arachnid deterministic deployment proxy)
 Owner:    0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4
+Status:   LIVE on all four chains since 2026-11-09.
+Fee:      3% per swap in the quote currency = 2% to collector + 1% MUSN burned.
+Split:    50% collect / 25% auto-buyback-and-burn / 25% auto-add-liquidity.
 
---- BASE (chain 8453) ---
+--- BASE (chain 8453) — DEPLOYED ---
   token:     0x0000000fc9a3c921ca909d84ae404a9ccaef4479
   collector: 0x0000000f64352eb1bacef4d9d5cae00f505a149e
-  hook:      0x833b94cf03bd02c25bad3ce19e906622b37f00cc  salt 0x000000000000000000000000000000000000000000000000000000000001b3e2 (flags 0xCC)
-  hook initCodeHash: 0xb0a2304ac5f6c7f591508ba95e243d5b1aff624bfd085612d5b571c4f07fe925
-  pool: MUSN/WETH fee 3000, hook 0xCC, ticks [-193920, -189420]
+  hook:      0x833b94cf03bd02c25bad3ce19e906622b37f00cc (flags 0xCC)
+  poolId:    0x046b13c1f2ea8391995a5d902e1a3c96a752ea20d070b5defb70ae86452b4314
+  pool: MUSN/WETH fee 3000, hook 0xCC
   seed: 25T MUSN + 118700000000000 WETH base units (~$0.25)
-  deploy tx order:
-    1. CREATE2 token (salt 0x00000000000000000000000000000000000000000000000000000000ff37a90a)
-    2. CREATE2 collector (salt 0x00000000000000000000000000000000000000000000000000000001e52c2dc6)
-    3. CREATE2 hook (salt 0x000000000000000000000000000000000000000000000000000000000001b3e2)
-    4. initialize pool (MUSN/WETH, fee 3000, hook)
-    5. approve MUSN + quote to Permit2, mint seed position (25T + quote)
-    6. (recommended) burn leftover seed MUSN dust to dead address
-  gas estimate: ~8,771,212 gas (fork, with-automation upper bound) = 0.000084 ETH (~$0.1772)
-  sniper reserve left: 0.00035 ETH (~$0.74) — covers ~5 sniper buys + gas
+  deploy txs:
+    token:     0xc5b9c6a5bbc5efcf1f794d0be44593cd53520550701ef274e001fe7b884bb8b0 (block 55219684)
+    collector: 0x031d30e7a9c7a475cbe3a7c7b2831eea15a3c3e2de55bba753f71948b9cc99df (block 55219696)
+    hook:      0x8dc608f2f589ddbae46ea7aa523df1b4b502a1a1165ccd427bd0de7f3c62a556 (block 55219707)
+    seed:      0xdf06c85db1337335cd231491df4cf85fbb0d85d97b73e0c160dd5a485a2cf6cc (block 55219771)
+  deployed:  2026-11-09T14:25:32.136Z
 
---- POLYGON (chain 137) ---
+--- POLYGON (chain 137) — DEPLOYED ---
   token:     0x0000000fc9a3c921ca909d84ae404a9ccaef4479
   collector: 0x0000000f64352eb1bacef4d9d5cae00f505a149e
-  hook:      0xe77331388cd74fc9b5d453925b5f6f834e6000cc  salt 0x0000000000000000000000000000000000000000000000000000000000003e4b (flags 0xCC)
-  hook initCodeHash: 0xa9eff09e585ef683eea006386c83d3aa12bae48544d0815305fc221411bf64d6
-  pool: MUSN/WPOL fee 3000, hook 0xCC, ticks [-96720, -92220]
+  hook:      0xe77331388cd74fc9b5d453925b5f6f834e6000cc (flags 0xCC)
+  poolId:    0x6f8feb328e09c9ec76975d358d3d27432e83219a100de33a82887c090318ad3b
+  pool: MUSN/WPOL fee 3000, hook 0xCC
   seed: 25T MUSN + 1980000000000000000 WPOL base units (~$0.25)
-  deploy tx order:
-    1. CREATE2 token (salt 0x00000000000000000000000000000000000000000000000000000000ff37a90a)
-    2. CREATE2 collector (salt 0x00000000000000000000000000000000000000000000000000000001e52c2dc6)
-    3. CREATE2 hook (salt 0x0000000000000000000000000000000000000000000000000000000000003e4b)
-    4. initialize pool (MUSN/WPOL, fee 3000, hook)
-    5. approve MUSN + quote to Permit2, mint seed position (25T + quote)
-    6. (recommended) burn leftover seed MUSN dust to dead address
-  gas estimate: ~8,814,289 gas (fork, with-automation upper bound) = 0.068193 POL (~$0.0086)
-  sniper reserve left: 3.37 POL (~$0.43) after the 0.16 POL setAgentURI reserve — ~21 buys
+  deploy txs:
+    token:     0x00362905a6c0c279a7a108abc9165f3ed8d13eda6190b09b6085f20388137d0d (block 97019313)
+    collector: 0x9c6d1a085ccd391f2dbc4908b4184c074ac9c6028a4a039473526e258ac36624 (block 97019316)
+    hook:      0x8cc1faef2ca754f7235c989c4a1c1b89a0b6cf0524ee5a723ed4d4b5d2ecddc8 (block 97019319)
+    seed:      0x532ab8052e0f3869455de1b3656a5a72c83cb7b59be13547d81135d62a264257 (block 97019410)
+  deployed:  2026-11-09T14:29:34.211Z
 
---- ARC (chain 5042) ---
+--- ARC (chain 5042) — DEPLOYED ---
   token:     0x0000000fc9a3c921ca909d84ae404a9ccaef4479
   collector: 0x0000000f64352eb1bacef4d9d5cae00f505a149e
-  hook:      0x88a5b0efe0985c3a9f18174ff2178c98d0c000cc  salt 0x000000000000000000000000000000000000000000000000000000000000267f (flags 0xCC)
-  hook initCodeHash: 0xa3171a35fb8773c1cc50b36eaa4f28b717676a527a11d43acd5e1899a7b5890b
-  pool: MUSN/USDC fee 3000, hook 0xCC, ticks [-393720, -389220]
+  hook:      0x88a5b0efe0985c3a9f18174ff2178c98d0c000cc (flags 0xCC)
+  poolId:    0x83831171857d9b3bdb155c969ce998446dd4146a985304eb928caec49411c93b
+  pool: MUSN/USDC fee 3000, hook 0xCC
   seed: 25T MUSN + 250000 USDC base units (~$0.25)
-  deploy tx order:
-    1. CREATE2 token (salt 0x00000000000000000000000000000000000000000000000000000000ff37a90a)
-    2. CREATE2 collector (salt 0x00000000000000000000000000000000000000000000000000000001e52c2dc6)
-    3. CREATE2 hook (salt 0x000000000000000000000000000000000000000000000000000000000000267f)
-    4. initialize pool (MUSN/USDC, fee 3000, hook)
-    5. approve MUSN + quote to Permit2, mint seed position (25T + quote)
-    6. (recommended) burn leftover seed MUSN dust to dead address
-  gas estimate: ~9,335,542 gas (fork, with-automation upper bound) = 0.006866 USDC (~$0.0069)
-  sniper reserve left: 0.568 USDC — ~20 buys
+  deploy txs:
+    token:     0xcb72901464e31a90afefac86abfe966413bebdfce205cf43573b011a965377e9 (block 30362598)
+    collector: 0x290d815ed65189b96da9d5b0d5cdc27e0be390fcca781e73665d6ffff6d1e18e (block 30362603)
+    hook:      0x36fe9a3ec8c513866283c3586e57030214f52c4f446e208ac4042ba190c80c56 (block 30362608)
+    seed:      0x100705c869e5aaeaf4981567032371d8ce3399296e0933982d526cb16e2044c1 (block 30362634)
+  deployed:  2026-11-09T14:26:10.499Z
 
---- ROBINHOOD (chain 4663) ---
+--- ROBINHOOD (chain 4663) — DEPLOYED ---
   token:     0x0000000fc9a3c921ca909d84ae404a9ccaef4479
   collector: 0x0000000f64352eb1bacef4d9d5cae00f505a149e
-  hook:      0x15a97f2b6be0b092ad77e77d0d89acda5c0900cc  salt 0x0000000000000000000000000000000000000000000000000000000000007983 (flags 0xCC)
-  hook initCodeHash: 0x37cdcf573a10450975c9633192ed79d89260570bef9254c7dd478a645d04ec28
-  pool: MUSN/WETH fee 3000, hook 0xCC, ticks [-887220, 887220]
+  hook:      0x15a97f2b6be0b092ad77e77d0d89acda5c0900cc (flags 0xCC)
+  poolId:    0x358f253f4e7c5badc32e7a0a1124c0644f61432ca2608f0808a53dfdb58e4602
+  pool: MUSN/WETH fee 3000, hook 0xCC
   seed: 25T MUSN + 118700000000000 WETH base units (~$0.25)
-  deploy tx order:
-    1. CREATE2 token (salt 0x00000000000000000000000000000000000000000000000000000000ff37a90a)
-    2. CREATE2 collector (salt 0x00000000000000000000000000000000000000000000000000000001e52c2dc6)
-    3. CREATE2 hook (salt 0x0000000000000000000000000000000000000000000000000000000000007983)
-    4. initialize pool (MUSN/WETH, fee 3000, hook)
-    5. approve MUSN + quote to Permit2, mint seed position (25T + quote)
-    6. (recommended) burn leftover seed MUSN dust to dead address
-  gas estimate: ~8,771,212 gas (fork, with-automation upper bound) = 0.000084 ETH (~$0.1772)
-  sniper reserve left: 0.0001 ETH (~$0.21) — ~5-6 copy-buys, tight
+  deploy txs:
+    token:     0x8959f18b242ee0595b5d10096c44fc57881716d865577b201e9d5787e08a96d7 (block 110129034)
+    collector: 0xb30867eb431ff51bf2872f29cfbf251915b357a0755a702b4277420848afbeaf (block 110129062)
+    hook:      0x67640837045e9c942263aca7cf0b04edea1f9dfb39e16a6d2912e79464c47a31 (block 110129095)
+    seed:      0xc1db6432f27f60ed2f4867d29da8dcc8735f066c4164deb5f7264fcbfb41ecde (block 110129285)
+  deployed:  2026-11-09T14:32:33.516Z
 
-=== OPEN DECISIONS (need the user) ===
-- Supply 100T / 25T per chain / 9 decimals: UNCONFIRMED by the user.
-- Automation threshold: proposed $0.05 of fees per chain (see report).
+=== DECISIONS — RESOLVED ===
+- Supply 100T / 25T per chain / 9 decimals: CONFIRMED (deployed 2026-11-09).
+- Automation threshold: $0.05 of fees per chain — APPROVED by the user 2026-11-11.
+- Fee automation job: building (50/25/25 split, $0.05/chain trigger).
 - Bridge choice (Relay vs lock/release): open.
-- MAINNET GO: NOT authorized — this preview is for the user's final go.
-- Dust: the concentrated seed leaves MUSN dust with the deployer
-  (Polygon ~620.7B, Base ~104.6B, Arc ~229B). Recommend burning
-  the dust to the dead address after seeding so deployer holds 0.
+- MAINNET GO: LIVE — deployed 2026-11-09 on Base, Arc, Polygon, Robinhood.
+- Dust: seed MUSN dust burned to the dead address after seeding; deployer holds 0 MUSN.

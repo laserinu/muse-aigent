@@ -314,8 +314,16 @@ async function handleCandidate(client, state, cand, live) {
     if (bal !== null && bal > 0n) {
       const sim = await ct.simSellRoute(client, CHAIN, pos, bal);
       if (!sim.ok) {
-        pos.sellBlocked = true;
-        log(`${tag} SELL-ROUTE SIM FAILED after buy: ${sim.reason} — position flagged sellBlocked, do NOT buy more of this token.`);
+        if (sim.inconclusive) {
+          // False-positive guard (2026-11-11): the sim could not prove the
+          // hook blocks (allowance/helper not set up yet on a fresh
+          // position). Do NOT flag sellBlocked — the real sell sets up
+          // allowances/funding first, so it can still proceed.
+          log(`${tag} SELL-ROUTE SIM INCONCLUSIVE after buy: ${sim.reason} — position NOT flagged sellBlocked.`);
+        } else {
+          pos.sellBlocked = true;
+          log(`${tag} SELL-ROUTE SIM FAILED after buy: ${sim.reason} — position flagged sellBlocked, do NOT buy more of this token.`);
+        }
       } else {
         log(`${tag} post-buy sell-route sim OK: ${sim.detail}`);
       }

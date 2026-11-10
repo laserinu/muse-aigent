@@ -4,9 +4,12 @@
 // the hook address must end in 0x00CC for flags 0xCC), and prints the full
 // deploy preview: addresses, salts, constructor args, tx order, gas
 // estimates, seed plan, sniper reserve left.
-// Usage: node deploy-preview.js
+// Usage: node deploy-preview.js            (pre-deploy preview)
+//        node deploy-preview.js --live       (live status from deploy-result-*.json)
+//        node deploy-preview.js --live > ../deploy-preview.txt   (regenerate the live file)
 // Requires: ../grinder/MuseLinuToken.salt.json + ../grinder/MuseLinuFeeCollector.salt.json
 // Reads hook creation code from ../out/MuseLinuHook.sol/MuseLinuHook.json (paris build).
+// --live additionally requires tools/deploy-result-{base,arc,polygon,robinhood}.json.
 //
 // HOOK CONSTRUCTOR — the single source of truth is src/MuseLinuHook.sol:91:
 //   (IPoolManager _poolManager, address _token, address _quote,
@@ -152,7 +155,78 @@ function tickRange(tokenAddr, quoteAddr, seedQuote, fullRange) {
   return [floorToSpacing(tick - 2220, 60), ceilToSpacing(tick + 2220, 60)];
 }
 
+// --- LIVE STATUS MODE -------------------------------------------------
+// `node deploy-preview.js --live` regenerates deploy-preview.txt from the
+// ACTUAL deploy results (tools/deploy-result-*.json) instead of the
+// pre-deploy preview. Use this after a deploy so the file reflects the
+// live state — the preview's "MAINNET GO: NOT authorized" line is stale
+// once the token is live. The hook addresses are recomputed by the same
+// code path as the preview (never hardcoded), and the poolIds / tx hashes
+// / status come from the deploy-result JSONs.
+function printLive() {
+  const tokenSalt = readSalt("MuseLinuToken");
+  const collectorSalt = readSalt("MuseLinuFeeCollector");
+  const tokenAddr = tokenSalt.address;
+  const collectorAddr = collectorSalt.address;
+  const hookArtifact = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "..", "out", "MuseLinuHook.sol", "MuseLinuHook.json"), "utf8")
+  );
+  const hookCreation = hookArtifact.bytecode.object.replace(/^0x/, "");
+  console.log("=== MUSN DEPLOY — LIVE STATUS ===");
+  console.log("Token:    " + tokenAddr + "  salt " + tokenSalt.salt);
+  console.log("Collector:" + collectorAddr + "  salt " + collectorSalt.salt);
+  console.log("Factory:  " + FACTORY + " (Arachnid deterministic deployment proxy)");
+  console.log("Owner:    " + AGENT);
+  console.log("Status:   LIVE on all four chains since 2026-11-09.");
+  console.log("Fee:      3% per swap in the quote currency = 2% to collector + 1% MUSN burned.");
+  console.log("Split:    50% collect / 25% auto-buyback-and-burn / 25% auto-add-liquidity.");
+  console.log("");
+  for (const [name, c] of Object.entries(CHAINS)) {
+    const ctorArgs = encodeAbiParameters(
+      parseAbiParameters("address,address,address,address,uint24,int24"),
+      [c.poolManager, tokenAddr, c.quote, collectorAddr, 3000, 60]
+    );
+    const initCode = hookCreation + ctorArgs.slice(2);
+    const initCodeHash = keccakHex(Buffer.from(initCode, "hex"));
+    let hookSalt = 0n;
+    let hookAddr = "";
+    while (true) {
+      const saltHex = "0x" + hookSalt.toString(16).padStart(64, "0");
+      const addr = create2Address(FACTORY, saltHex, initCodeHash);
+      if (addr.toLowerCase().endsWith("00cc")) { hookAddr = addr; break; }
+      hookSalt++;
+    }
+    const result = JSON.parse(fs.readFileSync(path.join(__dirname, "deploy-result-" + name + ".json"), "utf8"));
+    const tx = (step) => {
+      const t = (result.txs || []).find((x) => x.step === step && x.hash);
+      return t ? t.hash + " (block " + t.block + ")" : "n/a";
+    };
+    console.log("--- " + name.toUpperCase() + " (chain " + c.chainId + ") — " + result.status.toUpperCase() + " ---");
+    console.log("  token:     " + tokenAddr);
+    console.log("  collector: " + collectorAddr);
+    console.log("  hook:      " + hookAddr + " (flags 0xCC)");
+    console.log("  poolId:    " + (result.verifications && result.verifications.poolId ? result.verifications.poolId : "n/a"));
+    console.log("  pool: MUSN/" + c.quoteSymbol + " fee 3000, hook 0xCC");
+    console.log("  seed: 25T MUSN + " + c.seedQuote.toString() + " " + c.quoteSymbol + " base units (~$0.25)");
+    console.log("  deploy txs:");
+    console.log("    token:     " + tx("deploy-token"));
+    console.log("    collector: " + tx("deploy-collector"));
+    console.log("    hook:      " + tx("deploy-hook"));
+    console.log("    seed:      " + tx("seed-multicall"));
+    console.log("  deployed:  " + (result.finishedAt || "n/a"));
+    console.log("");
+  }
+  console.log("=== DECISIONS — RESOLVED ===");
+  console.log("- Supply 100T / 25T per chain / 9 decimals: CONFIRMED (deployed 2026-11-09).");
+  console.log("- Automation threshold: $0.05 of fees per chain — APPROVED by the user 2026-11-11.");
+  console.log("- Fee automation job: building (50/25/25 split, $0.05/chain trigger).");
+  console.log("- Bridge choice (Relay vs lock/release): open.");
+  console.log("- MAINNET GO: LIVE — deployed 2026-11-09 on Base, Arc, Polygon, Robinhood.");
+  console.log("- Dust: seed MUSN dust burned to the dead address after seeding; deployer holds 0 MUSN.");
+}
+
 function main() {
+  if (process.argv.includes("--live")) { printLive(); return; }
   const tokenSalt = readSalt("MuseLinuToken");
   const collectorSalt = readSalt("MuseLinuFeeCollector");
   const tokenAddr = tokenSalt.address;
