@@ -1,0 +1,27 @@
+{
+  "chain": 4663,
+  "chainName": "Robinhood",
+  "submittedAt": "2026-11-10T05:28:33.371Z",
+  "dryRun": true,
+  "maker": "0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73",
+  "makerSymbol": "W",
+  "taker": "0x8888CDad9Ef66382f89E68f95Ec384d89ec28888",
+  "takerSymbol": "N",
+  "makingAmount": "150000000000000",
+  "takingAmount": "1500000000000000000000",
+  "price": "1e-7",
+  "expiry": 1888961310,
+  "salt": "100962599946877293650338474936606647363384109825466374299698774128510544430260",
+  "makerTraits": "2283614099912073621017197082050560",
+  "orderHash": "0x3d71ba0dd5d3e053f64608453cfd146db3c4245347f262cc231cb5f9f8df72c4",
+  "signature": null,
+  "apiStatus": 401,
+  "apiResponse": {
+    "success": false,
+    "error": "Unauthorized"
+  },
+  "registerTx": null,
+  "registerBlock": null,
+  "registerGasUsed": null,
+  "orderRegisteredEvent": false
+}

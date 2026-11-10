@@ -1,0 +1,27 @@
+{
+  "chain": 137,
+  "chainName": "Polygon",
+  "submittedAt": "2026-11-10T05:28:35.559Z",
+  "dryRun": true,
+  "maker": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+  "makerSymbol": "W",
+  "taker": "0x0000000fc9a3c921ca909d84ae404a9ccaef4479",
+  "takerSymbol": "M",
+  "makingAmount": "1000000000000000000",
+  "takingAmount": "10000000000000000",
+  "price": "1e-7",
+  "expiry": 1888961313,
+  "salt": "40734306999164301441723206153744597931417545768523624245516179205763071903140",
+  "makerTraits": "2283614103538851079861084606169088",
+  "orderHash": "0xd80167fefe4fa5b8f15b3c02ab5bc2a4e80e011dd9973c8890de42c953376fbf",
+  "signature": null,
+  "apiStatus": 401,
+  "apiResponse": {
+    "success": false,
+    "error": "Unauthorized"
+  },
+  "registerTx": null,
+  "registerBlock": null,
+  "registerGasUsed": null,
+  "orderRegisteredEvent": false
+}
