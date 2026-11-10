@@ -1,6 +1,6 @@
 # Why "No quote available" for $MUSE swaps — diagnosis
 
-**Date:** 2026-11-07 ~05:47 WIB
+**Date:** 2026-11-07 ~05:47 GMT+7
 **Token:** $MUSE `0xd1242aEcA57Cb80f9067800F2f43D78cc3F8D198`, Arc (5042), 9 decimals
 **Pool:** Uniswap V4 MUSE/USDC, PoolId `0x5a14e63c9943a180d24b31f45964bc11e24639e9f055f88f33a3ac58b6b27ff1`,
 fee 3000, tickSpacing 60, concentrated range [304080, 308520], liquidity 21,130,171,658,904
@@ -56,7 +56,7 @@ quote this pool.
 
 ### 2. (SECONDARY / contributing) The pool is brand new, tiny, and has zero volume
 
-- Created 2026-11-07 ~00:12 WIB (~5.5 hours before the report). TVL $0.50.
+- Created 2026-11-07 ~00:12 GMT+7 (~5.5 hours before the report). TVL $0.50.
   **Zero trades, zero volume ever.** No price history exists.
 - Aggregators that rely on an off-chain token/pool index (rather than reading
   the PoolManager directly) may not have indexed this pool yet, or may filter

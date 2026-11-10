@@ -1,16 +1,16 @@
 # Sniper v2 — Multichain Design Spec (DESIGN ONLY, no live changes)
 
-Prepared 2026-11-07 ~16:30 WIB. Research + design only.
+Prepared 2026-11-07 ~16:30 GMT+7. Research + design only.
 **Nothing has changed in the live bot:** `~/workspace/tokens/sniper/robinhood/STATE.json`
 untouched (live=true, 5/5, manage-only on Robinhood), no cron change, no code change,
 no buys, nothing spent. V2 starts dry-run (watch-only) and goes live only on a
 per-chain "Go" from the user, after funding is confirmed onchain.
 
 Builds on the parent draft `~/workspace/tokens/sniper/EXPANSION-PLAN-v2.md`
-(2026-11-07 ~16:20 WIB). Where this spec differs from that draft, the difference
+(2026-11-07 ~16:20 GMT+7). Where this spec differs from that draft, the difference
 is flagged explicitly (§12).
 
-## 0. The user request (verbatim, 2026-11-07 ~16:15 WIB)
+## 0. The user request (verbatim, 2026-11-07 ~16:15 GMT+7)
 
 > "Change it to watch the new prediction for intelligently legit tokens that has
 > minimum social media platforms and websites, from all available pools, and for
@@ -398,7 +398,7 @@ unless the hook is allowlisted).
   re-score crosses 50 AND a slot is free).
 - A hard-gate FAIL overrides any score. A deployer-rug link (−20) is a veto.
 
-> **LIVE CHANGE 2026-11-08 ~01:30 WIB (user decision): buy line lowered 50 → 45.**
+> **LIVE CHANGE 2026-11-08 ~01:30 GMT+7 (user decision): buy line lowered 50 → 45.**
 > Hooked pools cap at 45 at T+0 (liquidity-depth partial credit 5/15, lp-locked
 > and early-traction structurally 0 at birth), so 50 was near-unreachable for
 > the dominant launch type. Live thresholds now: ≥70 full, 45–69 half, <45
@@ -439,7 +439,7 @@ Robinhood.
 - **Per-chain cap: 5** (mirrors v1). Phase 1 total: 4 chains × 5 = **20 max**.
   Phase 2 total: +3 chains × 5 = **35 max** (Ethereum watch-only contributes 0).
 - **This reopens a decided question, deliberately.** The user chose "Keep cap
-  at 5" on 2026-11-07 ~15:09 WIB, one hour before this request — the cap
+  at 5" on 2026-11-07 ~15:09 GMT+7, one hour before this request — the cap
   question is only reopened because the scope itself changed (5 total across
   1 chain → 5 per chain across 4–7 chains). It needs an explicit re-approval;
   until then the live bot stays at 5 total, manage-only.
@@ -447,7 +447,7 @@ Robinhood.
 
 ## 9. Funding needed (the hard blocker)
 
-Wallet now (portfolio snapshot 2026-11-07 ~15:10 WIB): **~$1.15 total** —
+Wallet now (portfolio snapshot 2026-11-07 ~15:10 GMT+7): **~$1.15 total** —
 Robinhood ETH 0.00002238 (~$0.05), Base ETH 0.0003566 (~$0.80), Arc USDC
 0.098111 (~$0.10), Polygon POL 0.264159 (~$0.05), Solana 0. Robinhood alone
 cannot fund even 2 more snipes at v1 size + gas.
@@ -541,7 +541,7 @@ is confirmed onchain AND the user says "Go" for that chain.
   at +100%, all at −50%, otherwise hold; re-score at +60 min; social-profile
   appearance is logged, not auto-traded.
 
-## 12. Differences from EXPANSION-PLAN-v2.md (parent draft, ~16:20 WIB)
+## 12. Differences from EXPANSION-PLAN-v2.md (parent draft, ~16:20 GMT+7)
 
 1. **Stock pairs on Robinhood:** the draft says stock tokens "pair with USDG,
    not with new meme launches". The research behind this spec cites a Sept

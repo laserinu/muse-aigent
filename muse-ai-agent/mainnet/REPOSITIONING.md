@@ -1,6 +1,6 @@
 # $MUSE Pool Repositioning — COMPLETE
 
-**Date:** 2026-11-07 (attempt 2; attempt 1 was 2026-11-06 ~22:10 WIB)
+**Date:** 2026-11-07 (attempt 2; attempt 1 was 2026-11-06 ~22:10 GMT+7)
 **Status:** ✅ COMPLETE — position repositioned from full range to a ±25% concentrated range.
 
 ## What changed
@@ -21,15 +21,15 @@ Same capital (10B MUSE + 0.5 USDC), no new USDC added. Pool price unchanged by t
 
 All on Arc (5042), from the agent wallet 0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4 via the Privy CLI. No policy attached, so nothing gated the txs.
 
-### Attempt 1 (2026-11-06 ~22:10 WIB) — partial, session broke
+### Attempt 1 (2026-11-06 ~22:10 GMT+7) — partial, session broke
 | # | Action | Hash | Block | Gas | Status |
 |---|---|---|---|---|---|
 | 01 | Approve MUSE → Permit2 | 0x97797347fc03ecb686e5b5b5abd43672cb6857fd321b6ace91c80473a3e81ccb | 29906329 | 46,311 | ✅ success |
 
 Session broke ("Not logged in") between tx 01 and tx 02. Attempt 1 stopped per safety rules. Full record: `REPOSITIONING-ATTEMPT-1.md`.
 
-### Attempt 2 (2026-11-07 ~05:14–05:20 WIB) — complete
-Privy re-login completed ~05:14 WIB (device code YKFTR-YZ6F6). Pool re-verified first (block 29906807): price still exactly at seed (tick 306282, sqrtPriceX96 unchanged), position 322143 full range, agent USDC 1.454687. MUSE → Permit2 allowance from tx 01 confirmed still set (1e19) — tx 01 NOT resent. Calldata rebuilt with a fresh deadline (unix 1794010532, +2h). Target range [304080, 308520] reused — tick was still 306282, so no recompute was needed.
+### Attempt 2 (2026-11-07 ~05:14–05:20 GMT+7) — complete
+Privy re-login completed ~05:14 GMT+7 (device code YKFTR-YZ6F6). Pool re-verified first (block 29906807): price still exactly at seed (tick 306282, sqrtPriceX96 unchanged), position 322143 full range, agent USDC 1.454687. MUSE → Permit2 allowance from tx 01 confirmed still set (1e19) — tx 01 NOT resent. Calldata rebuilt with a fresh deadline (unix 1794010532, +2h). Target range [304080, 308520] reused — tick was still 306282, so no recompute was needed.
 
 | # | Action | Hash | Block | Gas | Status |
 |---|---|---|---|---|---|

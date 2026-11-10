@@ -1,6 +1,6 @@
 # Sniper v2 — Expansion Plan (DRAFT, watch-only until approved)
 
-Prepared 2026-11-07 ~16:20 WIB, for the user's message 2026-11-07 09:15:43Z:
+Prepared 2026-11-07 ~16:20 GMT+7, for the user's message 2026-11-07 09:15:43Z:
 "Change it to watch the new prediction for intelligently legit tokens that has minimum
 social media platforms and websites, from all available pools, and for all paired with
 all verified tokens and stocks, on every chains."
@@ -113,7 +113,7 @@ signal on top of the bytecode / honeypot / liquidity checks, not a replacement.
 
 ### 5. Funding — the hard blocker
 
-Agent wallet total ~$1.15 (portfolio snapshot 2026-11-07 ~15:10 WIB):
+Agent wallet total ~$1.15 (portfolio snapshot 2026-11-07 ~15:10 GMT+7):
 Robinhood ETH 0.00002238, Base ETH 0.0003566, Arc USDC 0.098111, Polygon POL
 0.264159, Solana 0. Robinhood alone cannot fund even 2 more snipes at 0.00001 ETH
 + gas. Every new chain needs its own gas token + quote token funded before ANY live
@@ -149,7 +149,7 @@ user funds unprompted. Watch-only (dry-run) costs nothing and can start immediat
 2. **Buy size per snipe:** keep 0.00001 ETH-equivalent per buy, or change it
    (smaller on unproven chains is the cautious option).
 3. **New cap:** keep 5 total, or a per-chain cap (e.g. 5 per chain), or a new total
-   (e.g. 10 / 20). Note: user chose "Keep cap at 5" on 2026-11-07 ~15:09 WIB, one
+   (e.g. 10 / 20). Note: user chose "Keep cap at 5" on 2026-11-07 ~15:09 GMT+7, one
    hour before this request — the cap question is only reopened because the scope
    itself changed.
 Plus the social-rule choice from §4: hard gate with +10 min wait, or score-only.

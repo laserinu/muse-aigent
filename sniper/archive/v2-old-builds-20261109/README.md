@@ -1,6 +1,6 @@
 # Archive: old sniper build versions (2026-11-09)
 
-Moved here 2026-11-09 ~14:22 WIB on the user's order: "Archive all the old build versions. Use all the new ones" (for the sniper).
+Moved here 2026-11-09 ~14:22 GMT+7 on the user's order: "Archive all the old build versions. Use all the new ones" (for the sniper).
 
 Everything in this dir is MOVED, not deleted — it is preserved for reference and can be restored. Nothing here is imported or read by the live watchers.
 

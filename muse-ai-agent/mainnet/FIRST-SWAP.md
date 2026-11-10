@@ -1,6 +1,6 @@
 # First live $MUSE swap — TEST BUY (mainnet)
 
-**Date:** 2026-11-07 ~06:05 WIB
+**Date:** 2026-11-07 ~06:05 GMT+7
 **Purpose:** First-ever swap on the $MUSE pool (proves the pool works on mainnet and the 3% hook fee works live). Direct Universal Router V4_SWAP, bypassing the V4Quoter (which reverts on our hook). Full diagnosis of the quoter failure: `BITGET-NO-QUOTE.md`.
 
 ## Result: SUCCESS — the pool works, the 3% fee works

@@ -1,4 +1,4 @@
-# Sniper v2 — Build Note (2026-11-07 ~16:30–16:40 WIB)
+# Sniper v2 — Build Note (2026-11-07 ~16:30–16:40 GMT+7)
 
 ## What was built
 
@@ -106,7 +106,7 @@ proposed vs hard gate; website + 1 social vs + 2 socials), and confirm
 ## Safety confirmations
 
 - **v1 untouched:** `~/workspace/tokens/sniper/robinhood/` run.js /
-  evaluate.js / trade.js / README.md mtimes still 2026-11-07 01:43–01:56 WIB.
+  evaluate.js / trade.js / README.md mtimes still 2026-11-07 01:43–01:56 GMT+7.
   Only STATE.json/LOG.md changed, by the live watcher's own 2-min runs.
 - No cron touched, no live flag flipped, no transaction sent.
 - Zip: `~/workspace/tokens/sniper-v2-build.zip` (see report).

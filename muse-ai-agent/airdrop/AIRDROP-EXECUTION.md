@@ -1,6 +1,6 @@
 # $MUSE Airdrop — Direct Push Execution
 
-**Date:** 2026-11-07 ~05:20–05:30 WIB
+**Date:** 2026-11-07 ~05:20–05:30 GMT+7
 **Status: COMPLETE — all 1,850 eligible wallets received their MUSE, verified onchain (0 mismatches).**
 
 ## Summary

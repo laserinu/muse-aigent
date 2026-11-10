@@ -31,7 +31,7 @@ saying "Go" per chain + flipping that chain's `live` flag (and the master
 - `social.js` — Dexscreener `/tokens/v1` info (websites/socials) + website
   HTTP 200 check. Links are self-declared, not verified.
 - `evaluate.js` — hard gates (all v1 checks, generalized to any quote) +
-  0–100 scoring. `≥70` full size, `45–69` half, `<45` watch only. Buy line lowered 50 → 45 by user decision 2026-11-08 ~01:30 WIB (hooked pools cap at 45 at T+0).
+  0–100 scoring. `≥70` full size, `45–69` half, `<45` watch only. Buy line lowered 50 → 45 by user decision 2026-11-08 ~01:30 GMT+7 (hooked pools cap at 45 at T+0).
 - `trade.js` — execution stub. Calldata building reuses the proven v1
   pattern (wrap → approve Permit2 → Permit2 approve router → Universal
   Router V4_SWAP, PoolKey as nested tuple). `executeTxs` refuses unless

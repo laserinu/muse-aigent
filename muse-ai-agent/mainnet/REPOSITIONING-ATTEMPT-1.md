@@ -1,13 +1,13 @@
 # $MUSE Pool Repositioning — Attempt 1 (PARTIAL, BLOCKED)
 
-**Date:** 2026-11-07 ~05:11 WIB
+**Date:** 2026-11-07 ~05:11 GMT+7
 **Status:** STOPPED — Privy session broke mid-execution. The position was NOT repositioned in this attempt. No funds moved by the repositioning itself (except the tx 1 gas and an unrelated 1.333 USDC top-up, see below).
 
-**✅ OUTCOME — completed in attempt 2 (2026-11-07 ~05:14–05:20 WIB).** After a second re-login (device code YKFTR-YZ6F6), txs 02–06 were sent in order and all confirmed: approve USDC → Permit2 (0xb0d7af08…, block 29906879), Permit2 MUSE (0x5a61d8ed…, 29906902), Permit2 USDC (0xbe7a3ee5…, 29906923), burn NFT 322143 (0x75e3c23e…, 29906943), mint new position (0xb1804c47…, 29906989). **New position NFT 322298, range [304080, 308520], liquidity 21,130,171,658,904 (9.4497x deeper); old NFT 322143 burned; pool price unchanged; 0.05 USDC buy impact 9.09% → 1.05%, 0.5 USDC buy 50% → 9.57%. Agent USDC after: 1.439483; agent MUSE leftover 145,054,684.84.** Full record: `~/workspace/tokens/muse-ai-agent/mainnet/REPOSITIONING.md`.
+**✅ OUTCOME — completed in attempt 2 (2026-11-07 ~05:14–05:20 GMT+7).** After a second re-login (device code YKFTR-YZ6F6), txs 02–06 were sent in order and all confirmed: approve USDC → Permit2 (0xb0d7af08…, block 29906879), Permit2 MUSE (0x5a61d8ed…, 29906902), Permit2 USDC (0xbe7a3ee5…, 29906923), burn NFT 322143 (0x75e3c23e…, 29906943), mint new position (0xb1804c47…, 29906989). **New position NFT 322298, range [304080, 308520], liquidity 21,130,171,658,904 (9.4497x deeper); old NFT 322143 burned; pool price unchanged; 0.05 USDC buy impact 9.09% → 1.05%, 0.5 USDC buy 50% → 9.57%. Agent USDC after: 1.439483; agent MUSE leftover 145,054,684.84.** Full record: `~/workspace/tokens/muse-ai-agent/mainnet/REPOSITIONING.md`.
 
 ## What happened
 
-The user approved "repositioning first" (move the full-range position NFT 322143 into a ±25% concentrated range [304080, 308520], same 10B MUSE + 0.5 USDC, no new USDC). The Privy session was re-logged-in at ~05:06 WIB and verified alive via `list-wallets`.
+The user approved "repositioning first" (move the full-range position NFT 322143 into a ±25% concentrated range [304080, 308520], same 10B MUSE + 0.5 USDC, no new USDC). The Privy session was re-logged-in at ~05:06 GMT+7 and verified alive via `list-wallets`.
 
 Execution proceeded one transaction at a time, verifying each receipt:
 
@@ -27,7 +27,7 @@ Execution proceeded one transaction at a time, verifying each receipt:
 - Tx 2, sent ~1 minute later, failed with "Not logged in. Run `login` first."
 - `list-wallets` after the failure also says "Not logged in."
 - Session file `~/.privy/session.json` still exists (2,472 bytes, written Nov 6 22:06 UTC at the re-login). Machine-id `07d8a4d781af42b090da365ed8ae0726`, hostname `htch-runtime`.
-- This is the known fragility: the session file is AES-256-GCM encrypted with a key derived from machine-id + hostname; a VM replacement changes the machine-id and makes the file undecryptable. Previous breaks: 2026-11-06 14:14, 17:33, ~23:05, 2026-11-07 ~00:06, and now ~05:11 WIB (the 6th).
+- This is the known fragility: the session file is AES-256-GCM encrypted with a key derived from machine-id + hostname; a VM replacement changes the machine-id and makes the file undecryptable. Previous breaks: 2026-11-06 14:14, 17:33, ~23:05, 2026-11-07 ~00:06, and now ~05:11 GMT+7 (the 6th).
 - Per the task safety rules, the agent STOPPED and did not attempt a re-login itself (the device-code flow requires the user to approve in their browser).
 
 ## Onchain state (verified after the stop, Arc block 29906399)

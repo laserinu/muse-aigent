@@ -1,6 +1,6 @@
 # $MUSE Relaunch — MAINNET Deployment Record
 
-**Date:** 2026-11-07 ~00:07 WIB (all txs confirmed)
+**Date:** 2026-11-07 ~00:07 GMT+7 (all txs confirmed)
 **Chain:** Arc (5042). Agent wallet: 0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4 (nonces 11–14 used).
 **Status:** LAUNCHED AND VERIFIED on mainnet. Supersedes the old token 0xD7Fc2E1D5A65DDc834f0b62c50782E47c1fa79d4 (and the dead 0x9514DB43552F590Fb798CFAfdE1d796e00b59154).
 

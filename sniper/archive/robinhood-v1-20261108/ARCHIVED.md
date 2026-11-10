@@ -1,13 +1,13 @@
 # v1 Robinhood Sniper — ARCHIVED
 
-**Retired by user order 2026-11-08 ~09:08 WIB ("Stop and archive v1").**
+**Retired by user order 2026-11-08 ~09:08 GMT+7 ("Stop and archive v1").**
 
 - Watcher cron `robinhood-token-sniper-watcher` DISABLED (was every 2 min). No more v1 scans, buys, or position management.
 - Code + STATE.json + LOG.md preserved here exactly as they were at retirement. Do not delete.
 - v2's memory loop still reads this STATE.json (path updated in `v2/memory-followup.js` + `v2/memory-backfill.js`) so deployer outcomes for v1-bought tokens keep resolving.
 - To revive v1 one day: move this directory back to `~/workspace/tokens/sniper/robinhood/` and re-enable the cron. Do NOT do that without an explicit user go-ahead.
 
-## Open positions at retirement (5, all bought 2026-11-08 08:57–09:00 WIB, 0.00001 ETH each)
+## Open positions at retirement (5, all bought 2026-11-08 08:57–09:00 GMT+7, 0.00001 ETH each)
 
 | Token | Amount | Buy tx |
 |---|---|---|
@@ -21,8 +21,8 @@ These are UNMANAGED now — the v1 sell rules (50% at +100%, all at −50%) no l
 
 ## History (10 earlier positions, all sold)
 
-- First 5 (Alon, GHOST, KYLIE, BAG, MAGATARD) — sold 2026-11-08 ~02:26 WIB, recovered 0.000048594 WETH.
-- Second 5 (bottom, GOOGLECAT, Firstkille, SKIMS, Canary) — sold in the cleanup 2026-11-08 ~07:53 WIB, WETH +0.0000485.
+- First 5 (Alon, GHOST, KYLIE, BAG, MAGATARD) — sold 2026-11-08 ~02:26 GMT+7, recovered 0.000048594 WETH.
+- Second 5 (bottom, GOOGLECAT, Firstkille, SKIMS, Canary) — sold in the cleanup 2026-11-08 ~07:53 GMT+7, WETH +0.0000485.
 
 ## Why retired
 

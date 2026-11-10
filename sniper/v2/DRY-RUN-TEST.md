@@ -1,6 +1,6 @@
 # Sniper v2 — Dry-Run Test Record
 
-**Date:** 2026-11-07 ~16:38–16:40 WIB (09:38–09:40 UTC)
+**Date:** 2026-11-07 ~16:38–16:40 GMT+7 (09:38–09:40 UTC)
 **Mode:** DRY-RUN only. `config.live=false`, all chains `live=false`.
 **No transactions sent. No funds spent. No v1 files touched.**
 
@@ -30,7 +30,7 @@
 
 ## Test 3 — Re-evaluate a v1 buy: Alon (09:38 UTC)
 
-`node evaluate.js 4663 0x3ddc0b2b…` (Alon, bought live by v1 at ~08:59 WIB):
+`node evaluate.js 4663 0x3ddc0b2b…` (Alon, bought live by v1 at ~08:59 GMT+7):
 all hard gates PASS (liquidity 2.468e25, fee 0, WETH pair, ERC-20 OK, no
 dangerous selectors, quoter inconclusive → transfer-sim PASS).
 Score **10/100** — social **0** (Dexscreener info still `null` ~7h after
@@ -100,7 +100,7 @@ Plus the direct re-evaluations: Alon (PASS, 10/100, WATCH) and PEPE social
 
 ---
 
-## Expanded quotes: all verified tokens + tokenized stocks (2026-11-07 ~18:30–18:45 WIB)
+## Expanded quotes: all verified tokens + tokenized stocks (2026-11-07 ~18:30–18:45 GMT+7)
 
 User Go chain: 18:21 USDC pairs allowed; 18:23 stock pairs YES; 18:24 all EVM
 chains; 18:25 ALL verified tokens + stocks; 18:25 "Go for all" (live, once
@@ -191,7 +191,7 @@ transactions sent in all tests. v1 untouched.
   Known pre-existing gap (out of scope): run.js never records positions, so
   sell rules never trigger.
 
-### Test 5 — Real NVDA pool, evaluator, flag true (18:41 WIB)
+### Test 5 — Real NVDA pool, evaluator, flag true (18:41 GMT+7)
 
 `node evaluate.js 4663 0x1c5ca4ccfe9030ee72a4d45ca0c491bf4eac041c2b2532ac56729e4e15927cf3`
 (memecoin `0x2077...` / NVDA, block 108339042): **PASS** — liquidity OK,
@@ -222,7 +222,7 @@ RH WBTC ok=false (balance 0), RH WETH ok=true (balance 0.0000223824 ETH >
 (approve NVDA→Permit2, Permit2 approve NVDA→Router, router execute
 V4_SWAP). No wrap step (NVDA is not WETH). Calldata builds correctly.
 
-### Test 8 — Full runner dry-run, 2,000 blocks × 3 live chains (18:41 WIB)
+### Test 8 — Full runner dry-run, 2,000 blocks × 3 live chains (18:41 GMT+7)
 
 `node run.js --chains 4663,8453,5042 --window-blocks 2000` (test copy,
 live=false): Robinhood 13 pools (6 WATCH score 10–15, 7 SKIP), Arc 7 pools
@@ -239,7 +239,7 @@ Live config: `expandedQuotesEnabled` false→true, o1 factories restored into
 5042,8453,4663 --live` + next watcher cycle watched. See LOG.md / parent
 report for the live outcome.
 
-### Test 9 — Position recording fix (2026-11-07 ~18:48 WIB)
+### Test 9 — Position recording fix (2026-11-07 ~18:48 GMT+7)
 
 **Bug:** the live buy branch in `run.js` incremented `snipesDone` and logged
 BOUGHT but never pushed anything into `state.positions`. The management loop
@@ -277,7 +277,7 @@ Fallback check: buy price from the Initialize-event `sqrtPriceX96`
 read ever fails. Dry-run runs left `soldHalf`/`soldAll` false (no mutation).
 **Zero transactions sent.**
 
-## Polygon (137) — dry-run for live enablement (2026-11-07 ~19:01–19:35 WIB)
+## Polygon (137) — dry-run for live enablement (2026-11-07 ~19:01–19:35 GMT+7)
 
 **Task:** user GO "Do snipping on Polygon too" + "Go". Same rules ($0.02 buys,
 cap 5, ≥70 full / 50–69 buy / <50 watch). Known blocker: Privy CLI `rpc`
@@ -428,7 +428,7 @@ Same v1 encoding sent to the Polygon V2 router
 empty data `0x` — the V2 router does NOT accept the v1 encoding. It needs
 its own V4-swap encoding research, not a drop-in swap.
 
-### POL budget math (verified onchain, block 96899044, 2026-11-07 ~19:35 WIB)
+### POL budget math (verified onchain, block 96899044, 2026-11-07 ~19:35 GMT+7)
 - Balance **5.5141593 POL** (unchanged since the +5 POL top-up; nonce still 3,
   no outgoing txs). Gas 287 gwei at check (baseFee ~250) — above the 100 gwei
   ceiling, so the guard would GAS-SKIP anyway.
@@ -454,7 +454,7 @@ its own V4-swap encoding research, not a drop-in swap.
    (guard would still pass at ≤100 gwei — the swap reverts regardless), or
    a different pool (fails on liquid pools with normal fees too).
 
-## Router V2 encoding — PROVEN on Polygon AND Base (2026-11-07 ~19:22–19:35 WIB)
+## Router V2 encoding — PROVEN on Polygon AND Base (2026-11-07 ~19:22–19:35 GMT+7)
 
 **VERDICT: PROVEN.** The Universal Router V2 encoding executes a V4 swap on
 both chains — the exact unblock for Polygon sniping and for live Base (whose
@@ -573,7 +573,7 @@ Polygon sniping (sign+broadcast path + V2 router now both proven) and
 live Base buys (same legacy-router failure, same fix). Robinhood (fork
 router) and Arc (0x4fcA…) are unaffected — their v1 encoding stays as-is.
 
-## V2 switch APPLIED + spot/sell-price fixes (2026-11-07 ~19:35 WIB)
+## V2 switch APPLIED + spot/sell-price fixes (2026-11-07 ~19:35 GMT+7)
 
 **Applied (live config + code, by the parent after reproducing the V2 proof):**
 - `trade.js`: `buildRouterExecuteV2` (byte-identical to v1 builder except the
@@ -629,16 +629,16 @@ never exercised live — 0 v2 buys before this):**
   minOut 50,662,710 raw USDC came from the quoter (that pool's PEPE is priced
   ~$0.013, not the famous PEPE — a different Base token).
 
-**First live cycle 2026-11-07 19:35:13 WIB (`--chains 5042,8453,4663,137 --live`):**
+**First live cycle 2026-11-07 19:35:13 GMT+7 (`--chains 5042,8453,4663,137 --live`):**
 Polygon scanned 96899622..96899639: 0 new pools; Robinhood 1 new pool — PIG
 watch 10/100; Arc 1 new pool — SKIP not a quote pair; Base 1 new pool — SKIP
 no active liquidity. **0 buys, 0 sells, 0 transactions.** Watcher cron
 `sniper-v2-watcher-arc-base` updated to `--chains 5042,8453,4663,137` and
-renamed (Arc + Base + Robinhood + Polygon); next run ~19:36:17 WIB.
+renamed (Arc + Base + Robinhood + Polygon); next run ~19:36:17 GMT+7.
 Polygon gas ~271 gwei at enablement — above the 100 gwei ceiling, so Polygon
 buys GAS-SKIP until gas drops. **Zero transactions sent in the entire apply.**
 
-## Buy line lowered 50 -> 45 (2026-11-08 ~01:30 WIB, user decision)
+## Buy line lowered 50 -> 45 (2026-11-08 ~01:30 GMT+7, user decision)
 
 Why: live ~7.5h produced 0 buys — 242 cycles, ~2,000 pools evaluated, best
 score ever 45/100, 21 unique tokens in the 30–45 band. Hooked pools cap at 45
@@ -654,12 +654,12 @@ updated to 45.
 
 Verification (real pools, evaluate.js CLI, 0 txs):
 - CURVEIL pool 0x14d7e1d991370a198f07213a7e21736f18b035ab99d89ef4260c0fef13d6a1be
-  (Robinhood, scored 45 at 17:44 WIB) → VERDICT: PASS, score 45, size **half**.
+  (Robinhood, scored 45 at 17:44 GMT+7) → VERDICT: PASS, score 45, size **half**.
   First 4 CURVEIL pool candidates errored with eth_getLogs HTTP 429 (Robinhood
   RPC rate limit, transient) before the 5th succeeded — no code failure.
 - FOREVER pool (scored 40) negative control: ran after; result recorded below.
 - FOREVER pool 0x9e1a51fc5d9f66ec5de309cbfe787a16fd8b28d633db3bd723b498fd7c34015b
-  (Robinhood, scored 40 at 18:10 WIB) → VERDICT: PASS, score 40, size **watch**.
+  (Robinhood, scored 40 at 18:10 GMT+7) → VERDICT: PASS, score 40, size **watch**.
   Negative control confirmed: 40 stays below the new line. First 4 FOREVER
   pool candidates errored with eth_getLogs HTTP 429 (transient); a 5th
   candidate returned SKIP score 0 — its pool had 0 active liquidity at the
